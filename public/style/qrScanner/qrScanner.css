@@ -1,0 +1,126 @@
+/* Styling untuk wrapper scanner */
+.scanner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Menggunakan tinggi viewport untuk pusat vertikal */
+    margin: 0 auto; /* Margin otomatis untuk horizontal center */
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+/* Styling untuk container scanner */
+.scanner-container {
+    max-width: 500px;
+    width: 100%;
+    background: linear-gradient(to right, #ffffff, #f7f7f7); /* Gradient background */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Styling untuk heading */
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Styling untuk video */
+video {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid #ddd;
+    margin-bottom: 20px;
+    background-color: #000;
+    transition: transform 0.3s ease; /* Animasi saat hover */
+}
+
+/* Styling untuk footer */
+.footer {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* Styling untuk select box */
+.form-control {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transisi saat hover */
+}
+
+.form-control:hover {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Styling untuk alert */
+.alert {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #856404;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.alert-warning .alert-icon {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+    font-size: 1.5em;
+    color: #856404;
+}
+
+.alert-warning .alert-text {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Responsif untuk perangkat dengan ukuran maksimal 768px */
+@media (max-width: 768px) {
+    .scanner-container {
+        padding: 15px;
+        max-width: 90%;
+    }
+
+    .footer {
+        font-size: 0.8em;
+    }
+
+    .form-control {
+        font-size: 0.9em;
+    }
+}
+
+/* Responsif untuk perangkat dengan ukuran maksimal 480px */
+@media (max-width: 480px) {
+    .scanner-container {
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    .footer {
+        font-size: 0.7em;
+    }
+
+    .form-control {
+        font-size: 0.8em;
+    }
+}

@@ -1,0 +1,248 @@
+/* Base styles for the grid */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 5px;
+}
+
+/* Ensure grid items are sized appropriately */
+.grid-item {
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+/* Responsive adjustments for the calendar container */
+.calendar-container {
+    width: 100%;
+    background-color: gray;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px; /* Increased font size for better readability on small screens */
+}
+
+.calendar-navigation {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+/* Responsive adjustments for calendar navigation */
+.calendar-navigation .nav-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    margin: 0 3px;
+}
+
+.calendar-navigation .nav-button:hover {
+    background-color: #0056b3;
+}
+
+.calendar-navigation .calendar-month-year {
+    flex: 1;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 5px;
+    color: #fff;
+}
+
+
+/* Calendar table adjustments for small screens */
+#calendar table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    background-color: #fff;
+}
+
+#calendar th, #calendar td {
+    width: 10%;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+#calendar th {
+    background-color: #f4f4f4;
+    font-size: 12px;
+}
+
+#calendar td.today {
+    background-color: #00c0ef;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+
+/* Responsive styles for small-box components */
+.small-box {
+    height: auto; /* Adjust height automatically to fit content */
+    padding: 15px;
+    box-sizing: border-box;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.small-box h3 {
+    font-size: 38px;
+    font-weight: bold;
+    margin: 0;
+    color: #fff;
+}
+
+.small-box p {
+    font-size: 18px;
+    color: #fff;
+}
+
+.small-box .icon {
+    top: 10px;
+    right: 10px;
+    font-size: 90px;
+    color: rgb(252, 251, 251);
+}
+
+.bg-time {
+    background-color: #3DC2EC !important;
+}
+
+.bg-siswa {
+    background-color: #4B70F5 !important;
+}
+
+.bg-absen {
+    background-color: #03346E !important;
+}
+
+.bg-pelatih {
+    background-color: #4C3BCF !important;
+}
+
+.bg-izin {
+    background-color: #402E7A !important;
+}
+
+.information-container {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.information-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.information-container th, 
+.information-container td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.information-container th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.information-container td {
+    background-color: #fff;
+}
+
+.information-container tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.information-container tr:hover {
+    background-color: #f1f1f1;
+}
+
+.attendance-summary table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.attendance-summary th, 
+.attendance-summary td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.attendance-summary th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.attendance-summary td {
+    background-color: #fff;
+}
+
+.attendance-summary tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.attendance-summary tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+/* Media queries for smaller devices */
+@media (max-width: 780px) {
+    /* Adjust grid layout for tablets */
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* Adjust font sizes */
+    .small-box h3 {
+        font-size: 30px;
+    }
+    .small-box p {
+        font-size: 16px;
+    }
+
+    /* Adjust calendar container for tablets */
+    .calendar-container {
+        padding: 5px;
+    }
+}
+
+/* Media queries for mobile devices */
+@media (max-width: 480px) {
+    /* Further adjust grid layout for mobile */
+    .grid-container {
+        grid-template-columns: 1fr;
+        gap: 5px; /* Reduce gap for mobile screens */
+    }
+
+    /* Adjust font sizes further */
+    .small-box h3 {
+        font-size: 24px;
+    }
+    .small-box p {
+        font-size: 14px;
+    }
+
+    /* Adjust calendar container for mobile */
+    .calendar-container {
+        font-size: 10px; /* Smaller font size for very small screens */
+        padding: 5px;
+    }
+
+    /* Adjust button sizes for mobile */
+    .calendar-navigation .nav-button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .attandace-summary {
+        background-color: gray;
+    }    
+}

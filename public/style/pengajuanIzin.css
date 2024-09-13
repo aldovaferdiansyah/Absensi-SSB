@@ -1,0 +1,128 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
+    box-sizing: border-box;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="file"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+input[type="file"]:focus,
+textarea,
+select:focus {
+    border: 1.5px solid #007bff;
+    outline: none;
+}
+
+button {
+    padding: 10px 15px;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.text-danger {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.button-container {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.button-container .btn-secondary {
+    background-color: #6c757d;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.button-container .btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.input-readonly {
+    background-color: #e6e4e4;
+    border: 1px solid #adacac;
+    cursor: not-allowed;
+    color: #777;
+}
+
+.input-readonly:focus {
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+
+@media (max-width: 480px) {
+    form {
+        width: 90%;
+        padding: 15px;
+    }
+
+    button {
+        padding: 8px 12px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 780px) {
+    form {
+        width: 80%;
+        padding: 18px;
+    }
+
+    button {
+        padding: 9px 14px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

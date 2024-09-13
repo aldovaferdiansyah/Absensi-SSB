@@ -1,0 +1,167 @@
+.container {
+    margin: 20px auto;
+    padding: 0 15px; /* Add some horizontal padding */
+}
+
+.header-section {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.logo-and-title {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Ensure space between logo and title */
+}
+
+.title-and-welcome {
+    display: flex;
+    width: 100%;
+    gap: 50px;
+}
+
+.title h1,
+.welcome-message h1 {
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title h2,
+.welcome-message h2 {
+    font-size: 24px;
+    color: #666;
+    margin: 10px 0;
+}
+
+.logossb img {
+    width: 300px;
+    height: 220px;
+    margin: 10px;
+}
+
+.content-section {
+    display: flex;
+    gap: 120px; /* Add gap between logo and profile section */
+}
+
+.profile-section {
+    max-width: 600px; /* Limit the width of the profile section */
+    padding: 20px;
+    border: 2px solid #ddd; /* Light grey border */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.profile-section h3 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.profile-section p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 10px; /* Add margin between paragraphs */
+}
+
+/* Untuk layar lebih kecil dari 780px */
+@media (max-width: 780px) {
+    .header-section {
+        margin-bottom: 20px;
+    }
+
+    .logo-and-title {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .title-and-welcome {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .title h1,
+    .welcome-message h1 {
+        font-size: 36px;
+    }
+
+    .title h2,
+    .welcome-message h2 {
+        font-size: 20px;
+    }
+
+    .logossb {
+        display: flex;
+        justify-content: center; /* Center align images */
+        margin: 0;
+    }
+
+    .logossb img {
+        width: 250px;
+        height: auto; /* Menjaga rasio aspek */
+    }
+
+    .content-section {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .profile-section {
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+/* Untuk layar lebih kecil dari 480px */
+@media (max-width: 480px) {
+    .header-section {
+        margin-bottom: 15px;
+    }
+
+    .logo-and-title {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .title-and-welcome {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .title h1,
+    .welcome-message h1 {
+        font-size: 28px;
+    }
+
+    .title h2,
+    .welcome-message h2 {
+        font-size: 18px;
+    }
+
+    .logossb {
+        display: flex;
+        justify-content: center; /* Center align images */
+        margin: 0;
+    }
+
+    .logossb img {
+        width: 200px;
+        height: auto; /* Menjaga rasio aspek */
+    }
+
+    .content-section {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .profile-section {
+        width: 100%;
+        padding: 10px;
+    }
+}
+

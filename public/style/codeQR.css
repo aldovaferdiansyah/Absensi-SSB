@@ -1,0 +1,244 @@
+.container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 80%;
+    max-width: 450px;
+    margin: 50px auto;
+    font-family: 'Arial', sans-serif;
+}
+
+.id-card {
+    position: relative;
+    border-radius: 10px;
+    padding: 20px;
+    background-image: url('/foto_kartu/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+    overflow: hidden;
+}
+
+.id-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.232);
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.id-card > * {
+    position: relative;
+    z-index: 2;
+}
+
+.id-card h1 {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.card-header {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.card-header h1 {
+    font-size: 1.4em;
+    margin: 10px;
+    color: #ffffff;
+}
+
+.card-header p {
+    margin: 5px 0 0;
+    font-size: 1em;
+    color: #f0f0f0;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 10px;
+    text-align: center;
+}
+
+.card-body p {
+    margin: 8px 0;
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: #ffffff;
+}
+
+.qr-code {
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    width: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0056b3;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    width: 100%;
+}
+
+a.button-link:hover {
+    background-color: #004494;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 18px;
+    }
+
+    .id-card h1 {
+        font-size: 1.3em;
+    }
+
+    a.button-link {
+        padding: 9px 18px;
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .id-card h1 {
+        font-size: 1.2em;
+    }
+
+    .id-card .card-header p, .id-card .card-body p {
+        font-size: 9px;
+    }
+
+    a.button-link {
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+    .qr-code {
+        height: 22vh;
+    }
+}
+
+@media print {
+    * {
+        overflow: visible !important;
+    }
+
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color: white !important;
+    }
+
+    .container {
+        width: 65mm;
+        height: 105mm;
+        margin: 0;
+        padding: 0px;
+        box-shadow: none !important;
+        page-break-inside: avoid !important;
+        -webkit-print-color-adjust: exact !important;
+        color: white !important;
+        position: absolute;
+        left: 30px;
+        top: 30px;
+    }
+
+    .id-card {
+        width: 65mm;
+        height: 105mm;
+        position: relative !important;
+        border-radius: 10px !important;
+        padding: 20px;
+        background-image: url('/foto_kartu/background.png') !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        color: white !important;
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+        overflow: hidden !important;
+    }
+
+    .id-card::before {
+        content: "" !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: rgba(0, 0, 0, 0.232) !important;
+        border-radius: 10px !important;
+        z-index: 1 !important;
+    }
+
+    .id-card > * {
+        position: relative !important;
+        z-index: 2 !important;
+    }
+
+    .id-card h1, .id-card p, .id-card .card-header h1{
+        font-size: 14px;
+    }
+
+    .id-card .card-header p, .id-card .card-body p {
+        font-size: 8.5px;
+    }
+
+    .id-card h1 strong, .id-card p, .id-card .card-header h1 strong, .id-card .card-header p strong, .id-card .card-body p strong {
+        color: white !important;
+    }
+
+    .qr-code {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        background-color: #ffffff !important;
+        width: 44mm;
+    }
+
+    .qr-code svg {
+        width: 150px;
+        height: 150px;
+    }
+
+    a.button-link, .card-footer, header, footer {
+        display: none !important;
+    }
+
+    @page {
+        size: A4;
+        margin: 0 !important;
+    }
+}

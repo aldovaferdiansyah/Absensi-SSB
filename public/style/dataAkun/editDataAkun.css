@@ -1,0 +1,119 @@
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
+    box-sizing: border-box;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="date"],
+select,
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+select:focus,
+input[type="file"]:focus {
+    border: 1.5px solid #007bff;
+    outline: none;
+}
+
+h2, h3 {
+    text-align: center;
+    margin: 20px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.text-danger {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+@media (max-width: 780px) {
+    form {
+        width: 90%;
+        margin: 40px auto;
+        padding: 18px;
+    }
+
+    button {
+        padding: 9px 14px;
+    }
+
+    .form-group select.form-control {
+        padding: 9px;
+    }
+}
+
+@media (max-width: 480px) {
+    form {
+        width: 100%;
+        margin: 30px auto;
+        padding: 15px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="password"],
+    select,
+    input[type="file"] {
+        padding: 8px;
+    }
+
+    button {
+        padding: 8px 12px;
+    }
+
+    .form-group select.form-control {
+        padding: 8px;
+    }
+}

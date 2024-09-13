@@ -1,0 +1,114 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
+    box-sizing: border-box;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+input[type="file"] {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+select:focus,
+input[type="file"]:focus {
+    border: 1.5px solid #007bff;
+    outline: none;
+}
+
+h2 {
+    text-align: center;
+    margin: 20px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.text-danger {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.input-readonly {
+    background-color: #e6e4e4;
+    border: 1px solid #adacac;
+    cursor: not-allowed;
+    color: #777;
+}
+
+.input-readonly:focus {
+    outline: none;
+}
+
+@media (max-width: 780px) {
+    .form-container {
+        padding: 0 10px;
+    }
+
+    form {
+        padding: 15px;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 0 5px;
+    }
+
+    form {
+        padding: 10px;
+        max-width: 100%;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select {
+        padding: 8px;
+    }
+
+    button {
+        padding: 8px 12px;
+    }
+}

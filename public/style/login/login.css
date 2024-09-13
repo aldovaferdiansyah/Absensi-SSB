@@ -1,0 +1,131 @@
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-logo a {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+.login-box-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.login-box-msg {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+}
+
+.form-control-feedback {
+    color: #999;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.btn-primary {
+    background-color: #2575fc;
+    border-color: #2575fc;
+}
+
+.btn-primary:hover {
+    background-color: #2525fc;
+    border-color: #2525fc;
+}
+
+.logossb{
+    text-align: center;
+}
+
+.logossb img {
+    max-width: 120px; /* Adjust as needed */
+    height: auto;
+    margin-bottom: 10px; /* Space below the logo */
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        max-width: 100%;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-logo a {
+        font-size: 20px;
+    }
+
+    .logo {
+        width: 60px;
+        margin-bottom: 15px;
+    }
+
+    .login-box-msg {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        padding: 8px;
+    }
+
+    .btn-primary {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 780px) {
+    .login-box {
+        max-width: 90%;
+        padding: 18px;
+        border-radius: 8px;
+    }
+
+    .login-logo a {
+        font-size: 22px;
+    }
+
+    .logo {
+        width: 70px;
+        margin-bottom: 18px;
+    }
+
+    .login-box-msg {
+        font-size: 15px;
+        margin-bottom: 18px;
+    }
+
+    .form-control {
+        padding: 9px;
+    }
+
+    .btn-primary {
+        font-size: 15px;
+    }
+}

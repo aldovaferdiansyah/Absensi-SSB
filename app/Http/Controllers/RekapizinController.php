@@ -25,6 +25,11 @@ class RekapizinController extends Controller
             $query->where('name', 'LIKE', "%{$name}%");
         }
 
+        if ($request->filled('role')) {
+            $role = $request->input('role');
+            $query->where('role', 'LIKE', "%{$role}%");
+        }
+
         if ($request->filled('date')) {
             $date = Carbon::parse($request->input('date'))->format('Y-m-d');
             $query->where(function($q) use ($date) {

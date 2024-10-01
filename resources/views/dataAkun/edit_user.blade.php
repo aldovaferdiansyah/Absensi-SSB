@@ -31,7 +31,7 @@
     </div>
 
     <div class="form-group">
-        <label>Password Baru</label>
+        <label>Password Baru <strong>(OPSIONAL)</strong></label>
         <input type="password" id="password" placeholder="Silahkan Masukkan Password Baru User ..." name="password">
         <div class="text-danger">
             @error('password')
@@ -41,7 +41,7 @@
     </div>
 
     <div class="form-group">
-        <label>Konfirmasi Password Baru</label>
+        <label>Konfirmasi Password Baru <strong>(OPSIONAL)</strong></label>
         <input type="password" id="confirm_password" placeholder="Konfirmasi Password Baru ..." name="confirm_password">
         <div class="text-danger">
             @error('confirm_password')

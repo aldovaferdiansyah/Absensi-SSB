@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ScannerSettingsController;
+use App\Http\Controllers\ScheduleController;
 
 // Data Student, DataPelatih dan QrCode
 use App\Http\Controllers\PelatihController;
@@ -28,21 +29,18 @@ use App\Http\Controllers\PengajuanizinController;
 // Scanner absensi
 use App\Http\Controllers\QRScannerController;
 
-// Halaman informasi
-use App\Http\Controllers\InformationController;
-
-
 Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/v_home',[HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('v_home');
+// Route untuk menampilkan halaman home
+Route::get('/v_home',[HomeController::class, 'index'])->name('v_home')->middleware(['auth', 'verified']);
 // Route untuk menampilkan halaman dashboard
-Route::get('/dashboard.v_dashboard',[DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('v_dashboard');
+Route::get('/dashboard.v_dashboard',[DashboardController::class, 'index'])->name('dashboard.v_dashboard')->middleware(['auth', 'verified']);
 // Route untuk menampilkan halaman rekap perizinan absen
-Route::get('/rekap.v_rekapizin', [RekapizinController::class, 'index'])->middleware(['auth', 'verified'])->name('rekapizin.index');
+Route::get('/rekap.v_rekapizin', [RekapizinController::class, 'index'])->name('rekapizin.index')->middleware(['auth', 'verified']);
 // Route untuk menampilkan rekap absensi Siswa
-Route::get('/attendances/absenSiswa', [StudentController::class, 'showAbsenSiswa'])->middleware(['auth', 'verified'])->name('attendances.absenSiswa');
+Route::get('/attendances/absenSiswa', [StudentController::class, 'showAbsenSiswa'])->name('attendances.absenSiswa')->middleware(['auth', 'verified']);
 
 // Hak akses admin
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
@@ -60,41 +58,36 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::delete('/users/{id}',[UserController::class, 'destroy'])->name('users.destroy');
 
     Route::get('/generate-user-qr-codes', [QrCodeController::class, 'generateForUsers'])->name('generate.user.qr.codes');
-    // Routing untuk QR Code Pelatih
+    // Route untuk QR Code Pelatih
     Route::get('/pelatih/qr-code/{id}', [PelatihController::class, 'qrCode'])->name('pelatih.qr-code');
-    // Routing untuk QR Code Siswa
+    // Route untuk QR Code Siswa
     Route::get('/student/qr-code/{id}', [StudentController::class, 'qrCode'])->name('student.qr-code');
 
-    // New routes for settings
+    // Route untuk menampilkan halaman setting data SSB
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::post('/settings/update', [SettingsController::class, 'update'])->name('settings.update');
-});
 
-
-// Hak akses pelatih
-Route::middleware(['auth', 'verified', 'role:pelatih'])->group(function () {
-
-    // Crud Jadwal Informasi
-    // Route untuk menampilkan halaman tambah Informasi
-    Route::get('/information/create', [InformationController::class, 'create'])->name('information.create');
-    // Route untuk menyimpan data informasi
-    Route::post('/information', [InformationController::class, 'store'])->name('information.store');
-    // Route untuk menampilkan halaman edit informasi
-    Route::get('/information/{id}/edit', [InformationController::class, 'edit'])->name('information.edit');
-    // Route untuk mengupdate data informasi
-    Route::put('/information/{id}', [InformationController::class, 'update'])->name('information.update');
-    // Route untuk menghapus data informasi
-    Route::delete('/information/{id}', [InformationController::class, 'destroy'])->name('information.destroy');
-
-    Route::get('/settingscanner', [ScannerSettingsController::class, 'index'])->name('settingscanner');
-    Route::post('/settingscanner/update', [ScannerSettingsController::class, 'updateSettings'])->name('settingscanner.update');
-
-
-
+    // Route untuk report pelatih
+    Route::get('/report/pelatih', [PelatihController::class, 'report'])->name('report.pelatih');
 });
 
 // Hak akses pelatih dan admin
 Route::middleware(['auth', 'verified', 'role:pelatih|admin'])->group(function () {
+    // Route untuk report siswa
+    Route::get('/report/siswa', [StudentController::class, 'report'])->name('report.siswa');
+    // Route untuk menampilkan halaman jadwal kegiatan
+    Route::get('/schedule/index', [ScheduleController::class, 'index'])->name('schedules.index');
+    // Route untuk menampilkan halaman form penambahan jadwal
+    Route::get('/schedule/create', [ScheduleController::class, 'create'])->name('schedules.create');
+    // Route untuk menyimpan data jadwal
+    Route::post('/schedule/store', [ScheduleController::class, 'store'])->name('schedules.store');
+    // Route untuk menampilkan halaman edit jadwal
+    Route::get('/schedule/{id}/edit', [ScheduleController::class, 'edit'])->name('schedules.edit');
+    // Route untuk menyimpan data terbaru jadwal
+    Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedules.update');
+    // Route untuk menghapus data jadwal
+    Route::delete('/schedule/{id}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
+
     // Route untuk menampilkan halaman daftar siswa
     Route::get('/students.index', [StudentController::class, 'index'])->name('students.index');
     // Rute untuk menampilkan halaman detail siswa
@@ -116,23 +109,12 @@ Route::middleware(['auth', 'verified', 'role:siswa|admin'])->group(function () {
     Route::get('/pelatih/detail/{id}',[PelatihController::class, 'detail']);
 });
 
-// Hak akses siswa
-Route::middleware(['auth', 'verified', 'role:siswa'])->group(function () {
-    // Route untuk menampilkan halaman Pengajuan Izin
-    Route::get('/permission.pengajuanizin', [PengajuanizinController::class, 'index'])->name('pengajuanizin.index');
-    // Route untuk menyimpan data pengajuan izin
-    Route::post('/permission.pengajuanizin', [PengajuanizinController::class, 'store'])->name('izin.submit');
-});
-
 // Hak akses siswa dan pelatih
 Route::middleware(['auth', 'verified', 'role:siswa|pelatih'])->group(function () {
     // Route untuk menampilkan halaman scanner absensi
     Route::get('/scanner.scannerAbsensi', [QrScannerController::class, 'index'])->name('scanner.scannerAbsensi');
     // Route untuk menyimpan data absensi
     Route::post('/scanner.attendance.store', [QrScannerController::class, 'storeAttendance'])->name('scanner.attendance.store');
-    // Route untuk menampilkan halaman informasi
-    Route::get('/information.v_information', [InformationController::class, 'index'])->name('informasi.index');
-    Route::get('/information', [InformationController::class, 'index'])->name('information.index');
     // Route untuk menampilkan halaman profile
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     // Route untuk menampilkan halaman form edit profile
@@ -143,9 +125,16 @@ Route::middleware(['auth', 'verified', 'role:siswa|pelatih'])->group(function ()
     Route::get('/profile/change-password', [ProfileController::class, 'showChangePasswordForm'])->name('profile.change-password');
     // Route untuk memproses perubahan password
     Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password.post');
-
+    // Route untuk mengecek lokasi
     Route::get('scanner/coordinates', [QrScannerController::class, 'getCoordinates'])->name('scanner.coordinates');
-
+    // Route untuk menampilkan lokasi
+    Route::get('/settingscanner', [ScannerSettingsController::class, 'index'])->name('settingscanner');
+    // Route untuk menyimpan lokasi
+    Route::post('/settingscanner/update', [ScannerSettingsController::class, 'updateSettings'])->name('settingscanner.update');
+    // Route untuk menampilkan halaman Pengajuan Izin
+    Route::get('/permission.pengajuanizin', [PengajuanizinController::class, 'index'])->name('pengajuanizin.index');
+    // Route untuk menyimpan data pengajuan izin
+    Route::post('/permission.pengajuanizin', [PengajuanizinController::class, 'store'])->name('izin.submit');
 });
 
 require __DIR__.'/auth.php';

@@ -24,26 +24,27 @@ class PengajuanizinController extends Controller
             'end_date' => 'required|date|after_or_equal:start_date',
             'reason' => 'required|string',
             'type' => 'required|string',
-            'proof' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ],[
-            'name.required' => 'Nama Wajib Diisi !!!',
-            'start_date.required' => 'Tanggal Mulai Izin Wajib Diisi !!!',
-            'end_date.required' => 'Tanggal Akhir Izin Wajib Diisi !!!',
-            'reason.required' => 'Alasan Izin Wajib Diisi !!!',
-            'type.required' => 'Jenis Izin Wajib Diisi !!!',
-            'proof.required' => 'Bukti Izin Wajib Diisi !!!',
+            'proof' => 'nullable|string',
+            'fileProof' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
         $izin = new Pengajuanizin();
         $izin->name = $request->input('name');
+        $izin->role = Auth::user()->getRoleNames()->first();
         $izin->start_date = $request->input('start_date');
         $izin->end_date = $request->input('end_date');
         $izin->reason = $request->input('reason');
         $izin->type = $request->input('type');
 
-        if ($request->hasFile('proof')) {
-            $fileName = time() . '.' . $request->file('proof')->extension();
-            $request->file('proof')->move(public_path('uploads'), $fileName);
+        if ($request->filled('proof')) {
+            $imageData = $request->input('proof');
+            $fileName = time() . '_proof_image.png';
+            $imagePath = public_path('uploads/' . $fileName);
+            \File::put($imagePath, base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $imageData)));
+            $izin->proof = $fileName;
+        } elseif ($request->hasFile('fileProof')) {
+            $fileName = time() . '_proof_file.' . $request->file('fileProof')->getClientOriginalExtension();
+            $request->file('fileProof')->move(public_path('uploads'), $fileName);
             $izin->proof = $fileName;
         }
 
@@ -54,7 +55,20 @@ class PengajuanizinController extends Controller
 
     public function validateIndex()
     {
-        $izins = Pengajuanizin::where('status', 'pending')->get();
+        $user = Auth::user();
+
+        if ($user->hasRole('pelatih')) {
+            $izins = Pengajuanizin::whereHas('user', function ($query) {
+                $query->where('role', 'siswa');
+            })->where('status', 'pending')->get();
+        } elseif ($user->hasRole('admin')) {
+            $izins = Pengajuanizin::whereHas('user', function ($query) {
+                $query->where('role', 'pelatih');
+            })->where('status', 'pending')->get();
+        } else {
+            $izins = Pengajuanizin::where('status', 'pending')->get();
+        }
+
         return view('validation.validasi_izin', compact('izins'));
     }
 

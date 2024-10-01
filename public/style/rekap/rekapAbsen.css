@@ -40,7 +40,11 @@ h1 {
 }
 
 .one-third-width {
-    width: 19.7%;
+    width: 19.5%;
+}
+
+.one-third-width-report {
+    width: 35.3%;
 }
 
 .filters label {

@@ -15,6 +15,7 @@
             <tr>
                 <th>No</th>
                 <th>Nama</th>
+                <th>Hak Akses</th>
                 <th>Tanggal Mulai</th>
                 <th>Tanggal Akhir</th>
                 <th>Alasan</th>
@@ -28,13 +29,14 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $izin->name }}</td>
+                    <td>{{ $izin->role }}</td>
                     <td>{{ $izin->start_date->format('d M Y') }}</td>
                     <td>{{ $izin->end_date->format('d M Y') }}</td>
                     <td>{{ $izin->reason }}</td>
                     <td>{{ $izin->type }}</td>
                     <td>
                         @if($izin->proof)
-                            <a href="{{ asset('uploads/' . $izin->proof) }}" target="_blank" class="btn btn-primary fa fa-picture-o"> Bukti</a>
+                            <a href="{{ asset('uploads/' . $izin->proof) }}" target="_blank" class="btn btn-primary"> Bukti</a>
                         @else
                             Tidak Ada
                         @endif

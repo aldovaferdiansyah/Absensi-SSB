@@ -1,12 +1,12 @@
 @extends('layout.v_template')
 
-@section('title', 'Settings')
+@section('title', 'Ubah Data SSB')
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('style/settings.css') }}">
 
 <div class="container">
-    <h2>Update Settings</h2>
+    <h2>Ubah Data SSB</h2>
 
     <form action="{{ route('settings.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -35,7 +35,7 @@
             <label for="profile_content">Konten Profil</label>
             <textarea name="profile_content" id="profile_content" class="form-control">{{ old('profile_content', $settings->profile_content ?? '') }}</textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="submit" class="btn btn-primary">Ubah Data</button>
     </form>
 </div>
 

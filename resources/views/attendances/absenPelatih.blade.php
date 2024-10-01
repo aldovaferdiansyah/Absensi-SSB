@@ -1,6 +1,6 @@
 @extends('layout.v_template')
 
-@section('title', 'Rekap Absen Pelatih')
+@section('title', 'Laporan Presensi Pelatih')
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('style/rekap/rekapAbsen.css') }}">
@@ -8,15 +8,15 @@
 <div class="container">
     <div class="header">
         @if (auth()->user()->hasRole('pelatih'))
-            <h1>Rekap Absen Pribadi</h1>
+            <h1>Laporan Presensi Pribadi</h1>
         @endif
 
         @if (auth()->user()->hasRole('admin'))
-            <h1>Rekap Absen Pelatih</h1>
+            <h1>Laporan Presensi Pelatih</h1>
         @endif
 
         @if (auth()->user()->hasRole('admin'))
-            <button class="print-button" onclick="printReport()">Cetak</button>
+            <button class="print-button fa fa-print" onclick="printReport()"> Cetak</button>
         @endif
     </div>
 
@@ -43,7 +43,7 @@
                     @endfor
                 </select>
 
-                <label for="type">Pilih Tipe Absensi:</label>
+                <label for="type">Pilih Tipe Presensi:</label>
                 <select id="type" name="type" class="one-third-width">
                     <option value="">-- Semua Tipe --</option>
                     <option value="latihan" {{ request('type') == 'latihan' ? 'selected' : '' }}>Latihan</option>
@@ -59,9 +59,11 @@
         <thead>
             <tr>
                 <th>Nama Pelatih</th>
-                <th>Type Absensi</th>
-                <th>Waktu Kedatangan</th>
+                <th>Type Presensi</th>
+                <th>Waktu Datang</th>
+                <th>Status Datang</th>
                 <th>Waktu Pulang</th>
+                <th>Status Pulang</th>
             </tr>
         </thead>
         <tbody>
@@ -70,11 +72,13 @@
                     <td>{{ $attendance->name }}</td>
                     <td>{{ $attendance->type }}</td>
                     <td class="local-time">{{ $attendance->arrival_at->format('d M Y H:i') }}</td>
+                    <td>{{ $attendance->status_arrival }}</td>
                     <td class="local-time">{{ $attendance->departure_at ? $attendance->departure_at->format('d M Y H:i') : 'Belum Pulang' }}</td>
+                    <td>{{ $attendance->status_departure ? $attendance->status_departure : 'Belum Tercatat' }}</td>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4">Tidak ada data untuk ditampilkan</td>
+                    <td colspan="6">Tidak ada data untuk ditampilkan</td>
                 </tr>
             @endforelse
         </tbody>

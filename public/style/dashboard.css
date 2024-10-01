@@ -1,23 +1,70 @@
-/* Base styles for the grid */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 5px;
 }
 
-/* Ensure grid items are sized appropriately */
+.grid-container-two {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    justify-items: center;
+}
+
+.grid-container-khususpelatih {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    justify-items: center;
+}
+
+.grid-item-chart-khususpelatih {
+    width: 100%;
+    max-width: 700px;
+    box-sizing: border-box;
+}
+
+.grid-item-chart {
+    width: 100%;
+    max-width: 540px;
+    box-sizing: border-box;
+}
+
+.grid-container-three {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+}
+
 .grid-item {
     padding: 5px;
     box-sizing: border-box;
 }
 
-/* Responsive adjustments for the calendar container */
+.custom-link {
+    color: white; /* Ubah ini dengan warna yang diinginkan */
+    text-decoration: none; /* Menghapus garis bawah default */
+}
+
+.custom-link:hover {
+    color: black; /* Warna saat hover */
+    text-decoration: underline; /* Menambah garis bawah saat hover */
+}
+
 .calendar-container {
     width: 100%;
-    background-color: gray;
     padding: 10px;
     border-radius: 5px;
-    font-size: 12px; /* Increased font size for better readability on small screens */
+    font-size: 12px;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.chart-container {
+    max-width: 100%;
+    width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
 }
 
 .calendar-navigation {
@@ -25,9 +72,8 @@
     margin-bottom: 10px;
 }
 
-/* Responsive adjustments for calendar navigation */
 .calendar-navigation .nav-button {
-    background-color: #007bff;
+    background-color: #3494fc;
     color: white;
     border: none;
     padding: 6px 10px;
@@ -38,7 +84,7 @@
 }
 
 .calendar-navigation .nav-button:hover {
-    background-color: #0056b3;
+    background-color: #033a75;
 }
 
 .calendar-navigation .calendar-month-year {
@@ -50,13 +96,12 @@
     color: #fff;
 }
 
-
-/* Calendar table adjustments for small screens */
 #calendar table {
     width: 100%;
     border-collapse: collapse;
     margin: 0;
     background-color: #fff;
+    color: black;
 }
 
 #calendar th, #calendar td {
@@ -67,20 +112,19 @@
 
 #calendar th {
     background-color: #f4f4f4;
-    font-size: 12px;
+    font-size: 13.3px;
+    text-align: center;
 }
 
 #calendar td.today {
-    background-color: #00c0ef;
+    background-color: #0393b8;
     color: #fff;
     font-weight: bold;
     border-radius: 4px;
 }
 
-
-/* Responsive styles for small-box components */
 .small-box {
-    height: auto; /* Adjust height automatically to fit content */
+    height: auto;
     padding: 15px;
     box-sizing: border-box;
     background: #fff;
@@ -127,6 +171,14 @@
     background-color: #402E7A !important;
 }
 
+.bg-users {
+    background-color: #2b1e55 !important;
+}
+
+.bg-location {
+    background-color: #3A6D8C !important;
+}
+
 .information-container {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -138,7 +190,7 @@
     margin: 0;
 }
 
-.information-container th, 
+.information-container th,
 .information-container td {
     padding: 12px;
     border: 1px solid #ddd;
@@ -168,7 +220,7 @@
     margin: 0;
 }
 
-.attendance-summary th, 
+.attendance-summary th,
 .attendance-summary td {
     padding: 12px;
     border: 1px solid #ddd;
@@ -193,56 +245,66 @@
 }
 
 
-/* Media queries for smaller devices */
 @media (max-width: 780px) {
-    /* Adjust grid layout for tablets */
     .grid-container {
         grid-template-columns: 1fr;
     }
-
-    /* Adjust font sizes */
+    .grid-container-two {
+        grid-template-columns: 1fr;
+    }
+    .grid-container-three {
+        grid-template-columns: 1fr;
+    }
     .small-box h3 {
         font-size: 30px;
     }
     .small-box p {
         font-size: 16px;
     }
-
-    /* Adjust calendar container for tablets */
     .calendar-container {
+        padding: 5px;
+    }
+    .chart-container {
         padding: 5px;
     }
 }
 
-/* Media queries for mobile devices */
 @media (max-width: 480px) {
-    /* Further adjust grid layout for mobile */
     .grid-container {
         grid-template-columns: 1fr;
-        gap: 5px; /* Reduce gap for mobile screens */
+        gap: 5px;
     }
-
-    /* Adjust font sizes further */
+    .grid-container-two {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+    .grid-container-khususpelatih {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+    .grid-container-three {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
     .small-box h3 {
         font-size: 24px;
     }
     .small-box p {
         font-size: 14px;
     }
-
-    /* Adjust calendar container for mobile */
     .calendar-container {
-        font-size: 10px; /* Smaller font size for very small screens */
+        font-size: 10px;
         padding: 5px;
     }
-
-    /* Adjust button sizes for mobile */
+    .chart-container {
+        font-size: 10px;
+        padding: 5px;
+    }
     .calendar-navigation .nav-button {
         padding: 6px 10px;
         font-size: 12px;
     }
-
     .attandace-summary {
         background-color: gray;
-    }    
+    }
 }

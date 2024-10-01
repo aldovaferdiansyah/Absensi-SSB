@@ -23,6 +23,13 @@
             <label for="name">Cari Nama:</label>
             <input type="text" id="name" name="name" value="{{ request('name') }}" placeholder="Masukkan Nama ..." class="full-width">
 
+            <label for="role">Hak Akses:</label>
+            <select id="role" name="role" class="one-third-width">
+                <option value="">Pilih Hak Akses...</option>
+                <option value="siswa" {{ request('role') == 'siswa' ? 'selected' : '' }}>Siswa</option>
+                <option value="pelatih" {{ request('role') == 'pelatih' ? 'selected' : '' }}>Pelatih</option>
+            </select>
+
             <label for="date">Pilih Tanggal:</label>
             <input type="date" id="date" name="date" value="{{ request('date') }}" class="one-third-width">
 
@@ -46,9 +53,12 @@
             <tr>
                 <th>No</th>
                 <th>Nama</th>
-                <th>Tanggal Mulai</th>
                 @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('pelatih'))
+                <th>Hak Akses</th>
+                @endif
+                <th>Tanggal Mulai</th>
                 <th>Tanggal Akhir</th>
+                @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('pelatih'))
                 <th>Alasan</th>
                 <th>Jenis Izin</th>
                 @endif
@@ -63,9 +73,12 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $izin->name }}</td>
-                    <td>{{ $izin->start_date }}</td>
                     @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('pelatih'))
-                    <td>{{ $izin->end_date }}</td>
+                    <td>{{ $izin->role }}</td>
+                    @endif
+                    <td>{{ $izin->start_date->format('d M Y')  }}</td>
+                    <td>{{ $izin->end_date->format('d M Y')  }}</td>
+                    @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('pelatih'))
                     <td>{{ $izin->reason }}</td>
                     <td>{{ $izin->type }}</td>
                     @endif

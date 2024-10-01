@@ -10,22 +10,22 @@
 
         <!-- hak akses admin dan siswa -->
         @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('siswa'))
-            <li class="{{ request()->is('pelatih.index') ? 'active' : '' }}"><a href="/pelatih.index"><i class="fa fa-futbol-o"></i> <span>Pelatih</span></a></li>
+            <li class="{{ request()->is('pelatih.index') ? 'active' : '' }}"><a href="/pelatih.index"><i class="fa fa-user"></i> <span>Data Pelatih</span></a></li>
         @endif
 
         <!-- hak akses admin dan pelatih -->
         @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('pelatih'))
-            <li class="{{ request()->is('students.index') ? 'active' : '' }}"><a href="/students.index"><i class="fa fa-user"></i> <span>Siswa</span></a></li>
+            <li class="{{ request()->is('students.index') ? 'active' : '' }}"><a href="/students.index"><i class="fa fa-user"></i> <span>Data Siswa</span></a></li>
         @endif
 
         <!-- hak akses siswa dan pelatih -->
         @if (auth()->user()->hasRole('siswa') || auth()->user()->hasRole('pelatih'))
-            <li class="{{ request()->is('/scanner.scannerAbsensi') ? 'active' : '' }}"><a href="/scanner.scannerAbsensi"><i class="fa fa-camera"></i> <span>Scanner Absensi</span></a></li>
+            <li class="{{ request()->is('/scanner.scannerAbsensi') ? 'active' : '' }}"><a href="/scanner.scannerAbsensi"><i class="fa fa-camera"></i> <span>Scanner Presensi</span></a></li>
         @endif
 
         <!-- hak akses siswa -->
         @if (auth()->user()->hasRole('siswa'))
-        <li class="{{ request()->routeIs('attendances.absenSiswa') ? 'active' : '' }}"><a href="{{ route('attendances.absenSiswa') }}"><i class="fa fa-circle-o"></i><span>Rekap Absen Pribadi</span></a></li>
+        <li class="{{ request()->routeIs('attendances.absenSiswa') ? 'active' : '' }}"><a href="{{ route('attendances.absenSiswa') }}"><i class="fa fa-book"></i><span>Laporan Presensi Pribadi</span></a></li>
         @endif
 
         <!-- hak akses pelatih -->
@@ -33,7 +33,7 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-book"></i>
-                    <span>Rekap</span>
+                    <span>Data Laporan Presensi</span>
                     <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -41,29 +41,36 @@
                 <ul class="treeview-menu">
                     <li class="{{ request()->routeIs('attendances.absenPelatih') ? 'active' : '' }}">
                         <a href="{{ route('attendances.absenPelatih') }}">
-                            <i class="fa fa-circle-o"></i><span>Rekap Absen Pribadi</span>
+                            <i class="fa fa-circle-o"></i><span>Laporan Presensi Pribadi</span>
                         </a>
                     </li>
                     <li class="{{ request()->routeIs('attendances.absenSiswa') ? 'active' : '' }}">
                         <a href="{{ route('attendances.absenSiswa') }}">
-                            <i class="fa fa-circle-o"></i><span>Rekap Absen Siswa</span>
+                            <i class="fa fa-circle-o"></i><span>Laporan Presensi Siswa</span>
                         </a>
                     </li>
                     <li class="{{ request()->is('rekap.v_rekapizin') ? 'active' : '' }}">
                         <a href="/rekap.v_rekapizin">
-                            <i class="fa fa-circle-o"></i><span>Rekap Pengajuan Izin</span>
+                            <i class="fa fa-circle-o"></i><span>Laporan Pengajuan Izin</span>
                         </a>
                     </li>
                 </ul>
             </li>
+
+            <li class="{{ request()->routeIs('report.siswa') ? 'active' : '' }}">
+                <a href="{{ route('report.siswa') }}">
+                    <i class="fa fa-line-chart"></i>
+                    <span>Data Rekap Presensi Siswa</span>
+                </a>
+            </li>
         @endif
 
-         <!-- hak akses admin -->
+        <!-- hak akses admin -->
         @if (auth()->user()->hasRole('admin'))
             <li class="treeview">
             <a href="#">
                 <i class="fa fa-book"></i>
-                <span>Rekap Absen</span>
+                <span>Data Laporan Presensi</span>
                 <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
                 </span>
@@ -71,43 +78,77 @@
             <ul class="treeview-menu">
                 <li class="{{ request()->routeIs('attendances.absenPelatih') ? 'active' : '' }}">
                     <a href="{{ route('attendances.absenPelatih') }}">
-                        <i class="fa fa-circle-o"></i> <span>Rekap Absen Pelatih</span>
+                        <i class="fa fa-circle-o"></i> <span>Laporan Presensi Pelatih</span>
                     </a>
                 </li>
                 <li class="{{ request()->routeIs('attendances.absenSiswa') ? 'active' : '' }}">
                     <a href="{{ route('attendances.absenSiswa') }}">
-                        <i class="fa fa-circle-o"></i> <span>Rekap Absen Siswa</span>
+                        <i class="fa fa-circle-o"></i> <span>Laporan Presensi Siswa</span>
                     </a>
                 </li>
                 <li class="{{ request()->is('rekap.v_rekapizin') ? 'active' : '' }}">
                     <a href="/rekap.v_rekapizin">
-                        <i class="fa fa-circle-o"></i> <span>Rekap Pengajuan Izin</span>
+                        <i class="fa fa-circle-o"></i> <span>Laporan Pengajuan Izin</span>
+                    </a>
+                </li>
+            </ul>
+            </li>
+
+            <li class="treeview">
+            <a href="#">
+                <i class="fa fa-line-chart"></i>
+                <span>Data Rekap Presensi</span>
+                <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="{{ request()->routeIs('report.pelatih') ? 'active' : '' }}">
+                    <a href="{{ route('report.pelatih') }}">
+                        <i class="fa fa-circle-o"></i>
+                        <span>Data Rekap Presensi Pelatih</span>
+                    </a>
+                </li>
+
+                <li class="{{ request()->routeIs('report.siswa') ? 'active' : '' }}">
+                    <a href="{{ route('report.siswa') }}">
+                        <i class="fa fa-circle-o"></i>
+                        <span>Data Rekap Presensi Siswa</span>
                     </a>
                 </li>
             </ul>
             </li>
         @endif
 
-        <!-- hak akses admin dan pelatih -->
-        @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('pelatih'))
-            <li class="{{ request()->routeIs('izin.validate.index') ? 'active' : '' }}">
-                <a href="{{ route('izin.validate.index') }}">
-                    <i class="fa fa-file-text"></i> <span>Validasi Izin</span>
-                </a>
-            </li>
-        @endif
-
-        <!-- hak akses siswa -->
-        @if (auth()->user()->hasRole('siswa'))
+        @if (auth()->user()->hasRole('siswa') || auth()->user()->hasRole('pelatih'))
             <li class="{{ request()->is('permission.pengajuanizin') ? 'active' : '' }}"><a href="/permission.pengajuanizin"><i class="fa fa-file-text-o"></i> <span>Pengajuan Izin</span></a></li>
         @endif
 
-        @if (auth()->user()->hasRole('pelatih'))
-            <li class="{{ request()->is('information.v_information') ? 'active' : '' }}">
-                <a href="/information.v_information">
-                    <i class="fa fa-info"></i> <span>Informasi</span>
+        @if (auth()->user()->hasRole('admin'))
+            <li class="{{ request()->routeIs('izin.validate.index') ? 'active' : '' }}">
+                <a href="{{ route('izin.validate.index') }}">
+                    <i class="fa fa-file-text"></i> <span>Validasi Izin Pelatih</span>
                 </a>
             </li>
+        @endif
+
+        @if (auth()->user()->hasRole('pelatih'))
+            <li class="{{ request()->routeIs('izin.validate.index') ? 'active' : '' }}">
+                <a href="{{ route('izin.validate.index') }}">
+                    <i class="fa fa-file-text"></i> <span>Validasi Izin Siswa</span>
+                </a>
+            </li>
+        @endif
+
+        @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('pelatih'))
+            <li class="{{ request()->routeIs('schedules.index') ? 'active' : '' }}">
+                <a href="{{ route('schedules.index') }}">
+                    <i class="fa fa-calendar"></i> <span>Jadwal Kegiatan</span>
+                </a>
+            </li>
+        @endif
+
+        @if (auth()->user()->hasRole('pelatih'))
             <li class="{{ request()->is('settingscanner') ? 'active' : '' }}">
                 <a href="{{ route('settingscanner') }}">
                     <i class="fa fa-cogs"></i> <span>Pengaturan Scanner</span>
@@ -119,7 +160,7 @@
             <li class="{{ request()->is('settings') ? '' : '' }}">
                 <a href="{{ route('settings.index') }}">
                     <i class="fa fa-cog"></i>
-                    <span>Pengaturan</span>
+                    <span>Pengaturan Data SSB</span>
                 </a>
             </li>
         @endif

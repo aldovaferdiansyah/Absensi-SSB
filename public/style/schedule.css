@@ -1,0 +1,105 @@
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
+    box-sizing: border-box;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+select:focus {
+    border: 1.5px solid #007bff;
+    outline: none;
+}
+
+h2, h3 {
+    text-align: center;
+    margin: 20px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.text-danger {
+    color: red;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Tambahkan aturan agar form responsif di layar kecil */
+@media (max-width: 780px) {
+    form {
+        width: 95%; /* Tingkatkan lebar form sedikit untuk perangkat lebih kecil */
+        margin: 40px auto;
+        padding: 18px;
+    }
+
+    button {
+        padding: 9px 14px;
+    }
+
+    .form-group select.form-control {
+        padding: 9px;
+    }
+}
+
+@media (max-width: 480px) {
+    form {
+        width: 95%; /* Sesuaikan agar form lebih fleksibel pada layar kecil */
+        margin: 30px auto;
+        padding: 15px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    select {
+        padding: 8px;
+    }
+
+    button {
+        padding: 8px 12px;
+    }
+
+    .form-group select.form-control {
+        padding: 8px;
+    }
+}

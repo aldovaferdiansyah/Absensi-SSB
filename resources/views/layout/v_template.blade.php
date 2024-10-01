@@ -25,25 +25,25 @@
 
   <style>
     .logo {
-        font-size: 24px; /* Ukuran font yang lebih besar */
-        font-weight: bold; /* Menjadikan teks tebal */
-        color: #333; /* Warna teks */
-        text-transform: uppercase; /* Mengubah teks menjadi huruf kapital semua */
-        letter-spacing: 2px; /* Jarak antar huruf */
-        background: linear-gradient(90deg, #00c0ef, #00a65a); /* Gradient background */
-        -webkit-background-clip: text; /* Clip background untuk teks */
-        -webkit-text-fill-color: transparent; /* Mengatur teks menjadi transparan untuk gradient */
-        display: inline-block; /* Agar teks tetap dalam satu baris */
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        background: linear-gradient(90deg, #00c0ef, #00a65a);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
     }
     .profile-photo {
-      width: 40px; /* Sesuaikan ukuran lebar gambar */
-      height: 40px; /* Sesuaikan ukuran tinggi gambar */
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      object-fit: cover; /* Agar gambar tetap proporsional di dalam lingkaran */
+      object-fit: cover;
     }
     .profile-image-small {
-      width: 30px; /* Ukuran kecil, sesuaikan sesuai kebutuhan */
-      height: 30px; /* Ukuran kecil, sesuaikan sesuai kebutuhan */
+      width: 30px;
+      height: 30px;
     }
   </style>
 
@@ -121,9 +121,6 @@
           </a>
         </div>
       </div>
-
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-
       @include('layout.v_nav')
 
     </section>
@@ -147,9 +144,6 @@
   <!-- /.content-wrapper -->
 
   <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0
-    </div>
     <strong>Copyright &copy; 2024 <a href="#"></a></strong>
   </footer>
 
@@ -171,9 +165,7 @@
 <script>
   $(document).ready(function () {
     $('#toggleButton').on('click', function () {
-      $('#logo').toggle(); // Menyembunyikan atau menampilkan logo saat tombol diklik
-
-      // Mengubah ukuran gambar profil
+      $('#logo').toggle();
       $('#profileImage').toggleClass('profile-image-small');
     });
   });

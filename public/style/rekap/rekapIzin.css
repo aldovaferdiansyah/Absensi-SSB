@@ -21,6 +21,13 @@ h1 {
     color: #333;
 }
 
+.form-control {
+    width:  300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
 .filters {
     margin-bottom: 20px;
     padding: 10px;
@@ -37,10 +44,12 @@ h1 {
 
 .full-width {
     width: 100%;
+    padding: 10px;
 }
 
 .one-third-width {
-    width: 38.4%;
+    width: 21.5%;
+    padding: 10px;
 }
 
 .filters label {
@@ -49,7 +58,6 @@ h1 {
 }
 
 .filters select, .filters input {
-    padding: 10px;
     margin-bottom: 10px;
     margin-right: 10px;
     border-radius: 5px;
@@ -126,7 +134,7 @@ h1 {
 }
 
 /* Tablet and smaller screens */
-@media (max-width: 768px) {
+@media (max-width: 780px) {
     .container {
         padding: 15px;
     }
@@ -145,6 +153,10 @@ h1 {
         margin-bottom: 10px;
         margin-right: 0;
         width: 100%;
+    }
+
+    .form-control {
+        width: 500px;
     }
 
     .table {
@@ -209,6 +221,12 @@ h1 {
         margin-bottom: 10px;
         margin-right: 0;
         width: 100%;
+    }
+
+    .form-control {
+        width: 100%;
+        font-size: 14px;
+        padding: 8px;
     }
 
     .table {

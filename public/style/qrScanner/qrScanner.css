@@ -3,8 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh; /* Menggunakan tinggi viewport untuk pusat vertikal */
-    margin: 0 auto; /* Margin otomatis untuk horizontal center */
+    height: 80vh;
+    margin: 0 auto;
     padding: 0 10px;
     box-sizing: border-box;
 }

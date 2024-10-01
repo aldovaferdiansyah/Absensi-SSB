@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 13, 2024 at 06:27 AM
+-- Generation Time: Oct 01, 2024 at 06:51 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,7 +34,9 @@ CREATE TABLE `attendances` (
   `role` varchar(255) NOT NULL,
   `type` enum('latihan','pertandingan') NOT NULL,
   `arrival_at` timestamp NULL DEFAULT NULL,
+  `status_arrival` varchar(255) DEFAULT NULL,
   `departure_at` timestamp NULL DEFAULT NULL,
+  `status_departure` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -43,34 +45,16 @@ CREATE TABLE `attendances` (
 -- Dumping data for table `attendances`
 --
 
-INSERT INTO `attendances` (`id`, `user_id`, `name`, `role`, `type`, `arrival_at`, `departure_at`, `created_at`, `updated_at`) VALUES
-(22, 14, 'Aldova Ferdiansyah', 'pelatih', 'latihan', '2024-09-09 08:43:59', '2024-09-09 09:24:42', '2024-09-09 08:43:59', '2024-09-09 09:24:42'),
-(23, 15, 'Harfin Aqbil Falah', 'siswa', 'latihan', '2024-09-09 08:44:10', '2024-09-09 08:52:03', '2024-09-09 08:44:10', '2024-09-09 08:52:03'),
-(24, 17, 'Andri Sopian', 'siswa', 'latihan', '2024-09-09 08:52:49', NULL, '2024-09-09 08:52:49', '2024-09-09 08:52:49'),
-(25, 14, 'Aldova Ferdiansyah', 'pelatih', 'latihan', '2024-09-10 09:18:25', '2024-09-10 09:18:33', '2024-09-10 09:18:25', '2024-09-10 09:18:33'),
-(26, 14, 'Aldova Ferdiansyah', 'pelatih', 'pertandingan', '2024-09-10 09:38:06', '2024-09-10 09:45:00', '2024-09-10 09:38:06', '2024-09-10 09:45:00'),
-(27, 19, 'Nova Arianto', 'pelatih', 'latihan', '2024-09-13 02:08:37', '2024-09-13 02:08:48', '2024-09-13 02:08:37', '2024-09-13 02:08:48');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `information`
---
-
-CREATE TABLE `information` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `heading` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `information`
---
-
-INSERT INTO `information` (`id`, `heading`, `description`, `created_at`, `updated_at`) VALUES
-(1, 'Latihan', 'Latihan Pagi Pukul 07.00\r\nLapang 2A', '2024-09-03 02:06:36', '2024-09-03 02:06:36');
+INSERT INTO `attendances` (`id`, `user_id`, `name`, `role`, `type`, `arrival_at`, `status_arrival`, `departure_at`, `status_departure`, `created_at`, `updated_at`) VALUES
+(10, 14, 'Aldova Ferdiansyah', 'pelatih', 'latihan', '2024-09-24 08:17:35', 'Tepat Waktu', '2024-09-24 10:14:04', 'Tepat Waktu', '2024-09-24 08:17:35', '2024-09-24 10:14:04'),
+(14, 17, 'Andri Sopian', 'siswa', 'latihan', '2024-09-24 08:40:09', 'Terlambat', '2024-09-24 10:14:56', 'Tepat Waktu', '2024-09-24 08:40:09', '2024-09-24 10:14:56'),
+(16, 17, 'Andri Sopian', 'siswa', 'latihan', '2024-09-25 08:37:24', 'Tepat Waktu', NULL, NULL, '2024-09-25 08:37:24', '2024-09-25 08:37:24'),
+(18, 14, 'Aldova Ferdiansyah', 'pelatih', 'latihan', '2024-09-25 08:47:03', 'Tepat Waktu', NULL, NULL, '2024-09-25 08:47:03', '2024-09-25 08:47:03'),
+(20, 14, 'Aldova Ferdiansyah', 'pelatih', 'latihan', '2024-10-01 04:30:11', 'Tepat Waktu', NULL, NULL, '2024-10-01 04:30:11', '2024-10-01 04:30:11'),
+(21, 17, 'Andri Sopian', 'siswa', 'latihan', '2024-10-01 04:31:56', 'Tepat Waktu', NULL, NULL, '2024-10-01 04:31:56', '2024-10-01 04:31:56'),
+(22, 21, 'Debrianto Firmansyah', 'pelatih', 'latihan', '2024-10-01 04:37:53', 'Tepat Waktu', NULL, NULL, '2024-10-01 04:37:53', '2024-10-01 04:37:53'),
+(23, 19, 'Nova Arianto', 'pelatih', 'latihan', '2024-10-01 04:38:54', 'Tepat Waktu', NULL, NULL, '2024-10-01 04:38:54', '2024-10-01 04:38:54'),
+(24, 15, 'Harfin Aqbil Falah', 'siswa', 'latihan', '2024-10-01 04:47:00', 'Terlambat', NULL, NULL, '2024-10-01 04:47:00', '2024-10-01 04:47:00');
 
 -- --------------------------------------------------------
 
@@ -119,7 +103,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (36, '2024_09_05_091712_create_attendances_table', 24),
 (37, '2024_09_05_104139_create_attendances_table', 25),
 (38, '2024_09_05_112242_create_attendances_table', 26),
-(39, '2024_09_05_114259_create_attendances_table', 27);
+(39, '2024_09_05_114259_create_attendances_table', 27),
+(40, '2024_09_21_213303_create_schedules_table', 28),
+(41, '2024_09_23_121340_create_schedules_table', 29),
+(42, '2024_09_24_132959_create_attendances_table', 30),
+(43, '2024_09_28_104836_create_pengajuanizins_table', 31);
 
 -- --------------------------------------------------------
 
@@ -159,6 +147,7 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (3, 'App\\Models\\User', 14),
 (3, 'App\\Models\\User', 16),
 (3, 'App\\Models\\User', 19),
+(3, 'App\\Models\\User', 21),
 (3, 'App\\Models\\User', 31);
 
 -- --------------------------------------------------------
@@ -170,6 +159,7 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 CREATE TABLE `pengajuanizins` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `reason` text NOT NULL,
@@ -184,11 +174,8 @@ CREATE TABLE `pengajuanizins` (
 -- Dumping data for table `pengajuanizins`
 --
 
-INSERT INTO `pengajuanizins` (`id`, `name`, `start_date`, `end_date`, `reason`, `type`, `proof`, `status`, `created_at`, `updated_at`) VALUES
-(8, 'Harfin Aqbil Falah', '2024-09-09', '2024-09-10', 'sakit perut', 'sakit', '1725857385.png', 'Ditolak', '2024-09-09 04:49:45', '2024-09-09 05:37:58'),
-(9, 'Harfin Aqbil Falah', '2024-09-09', '2024-09-11', 'sakit kaki', 'sakit', '1725859803.jpg', 'Diterima', '2024-09-09 05:30:03', '2024-09-09 05:38:00'),
-(10, 'Harfin Aqbil Falah', '2024-09-09', '2024-09-10', 'sakit mata', 'sakit', '1725870369.png', 'Diterima', '2024-09-09 08:26:09', '2024-09-09 09:16:12'),
-(11, 'Hari Sukmana', '2024-09-13', '2024-09-13', 'Acara Pernikahan Keluarga', 'pribadi', '1726132805.jpg', 'pending', '2024-09-12 09:20:05', '2024-09-12 09:20:05');
+INSERT INTO `pengajuanizins` (`id`, `name`, `role`, `start_date`, `end_date`, `reason`, `type`, `proof`, `status`, `created_at`, `updated_at`) VALUES
+(12, 'Hari Sukmana', 'siswa', '2024-10-01', '2024-10-01', 'Sakit Demam', 'sakit', '1727757334_proof_file.pdf', 'Diterima', '2024-10-01 04:35:34', '2024-10-01 04:36:01');
 
 -- --------------------------------------------------------
 
@@ -238,6 +225,33 @@ CREATE TABLE `role_has_permissions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `schedules`
+--
+
+CREATE TABLE `schedules` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `date` date NOT NULL,
+  `time_start` time NOT NULL,
+  `time_end` time NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `schedules`
+--
+
+INSERT INTO `schedules` (`id`, `title`, `description`, `date`, `time_start`, `time_end`, `created_at`, `updated_at`) VALUES
+(1, 'Latihan', 'Latihan Rutinan Lapang Siliwangi A3', '2024-09-24', '15:10:00', '17:14:00', '2024-09-23 05:45:32', '2024-09-24 10:12:36'),
+(6, 'Pertandingan', 'VS SS Maninjau, Lapang Siliwangi A1', '2024-09-29', '15:00:00', '17:00:00', '2024-09-23 12:16:30', '2024-09-24 05:54:28'),
+(8, 'Latihan', 'Latihan Rutinan Lapang Siliwangi A1', '2024-09-25', '15:30:00', '17:30:00', '2024-09-25 08:28:22', '2024-09-25 08:28:22'),
+(9, 'Latihan', 'Latihan Rutinan Lapang Cihaur B2', '2024-10-01', '11:45:00', '13:45:00', '2024-10-01 04:15:01', '2024-10-01 04:15:42');
 
 -- --------------------------------------------------------
 
@@ -294,13 +308,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `gender`, `date_of_birth`, `age_group_category`, `phone_number`, `parents_name`, `parents_telephone_number`, `address`, `coach_category`, `age_group_coach_category`, `photo`, `qr_code`, `created_at`, `updated_at`) VALUES
-(1, 'admin SSBLite 1', 'adminssblite1@gmail.com', '$2y$12$wDGiATy1A4Bm2Cu8c4BYoO0JEI3sB7PQM787xz03e.nS5lCpnHuSK', 'Laki-laki', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-09-03 04:25:04', '2024-09-03 04:25:04'),
-(14, 'Aldova Ferdiansyah', 'aldovaferdiansyah12@gmail.com', '$2y$12$AlVCxKwzqSzMMCQIrVn0cOGLYiceWXdEcNtz2ijGaDUnaUnaicRb6', 'Laki-laki', '2002-10-23', NULL, '081222818994', NULL, NULL, 'Kp. Ciburial Mekar RT 02/ RW 07 Desa Margajaya Kec. Ngamprah', 'Pelatih Kepala', 'U-16', 'foto_pelatih/66deaa02261f6.png', '382147c9-8b2e-48ce-8bcb-f828a8970c8c', '2024-09-09 07:55:46', '2024-09-12 07:44:43'),
+(1, 'Admin Akademi Persib', 'adminpersib1933@gmail.com', '$2y$12$7tjfd8NH.S6g1iqPxxnww.79K4IRUGKgUcXfCxOgJuPGk5SbewuHq', 'Laki-laki', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-09-03 04:25:04', '2024-10-01 03:29:40'),
+(14, 'Aldova Ferdiansyah', 'aldovaferdiansyah12@gmail.com', '$2y$12$l5yiIsA71RSKcKor0FdIleDsmWTgsnzaardWV1Wpbsqv7Rpi/stji', 'Laki-laki', '2002-10-23', NULL, '081222818994', NULL, NULL, 'Kp. Ciburial Mekar RT 02/ RW 07 Desa Margajaya Kec. Ngamprah', 'Pelatih Kepala', 'U-16', 'foto_pelatih/66f4c4102124c.png', '382147c9-8b2e-48ce-8bcb-f828a8970c8c', '2024-09-09 07:55:46', '2024-09-26 06:25:04'),
 (15, 'Harfin Aqbil Falah', 'harfinaqbil@gmail.com', '$2y$12$vSde8DY/uZacn.CdlDxiDenkiY3zn/TbcIyCQUfse0oKixbND.E8W', 'Laki-laki', '2024-09-08', 'U-16', '087804824803', 'dada', '0878048248908', 'Jl. Cijeungjing, Rt 02 / Rw 23', NULL, NULL, 'foto_siswa/66deaa3501b94.png', '1ec93f17-f233-4e00-8823-d7b8d142ca97', '2024-09-09 07:56:37', '2024-09-09 07:56:37'),
 (16, 'Tatang', 'tatang@gmail.com', '$2y$12$.WXkPnotW79Ic7RgUWS2E.GR9dlfJEiEKie43GIVKVk8SaCeUjp..', 'Laki-laki', '2024-09-09', NULL, '087804824803', NULL, NULL, 'Jl. Cijeungjing, Rt 02 / Rw 23', 'Asisten Pelatih', 'U-16', 'foto_pelatih/66deb658e6988.png', 'e7face45-451f-43e3-932c-49ac4d2f1750', '2024-09-09 08:48:25', '2024-09-09 08:48:25'),
 (17, 'Andri Sopian', 'andrisopian13@gmail.com', '$2y$12$ZtqEYXXsANsJ3nuc5XjhA.Vh2GFicMjeY5ya2fG/Fkh5TauIIhKwm', 'Laki-laki', '2024-09-09', 'U-21', '0878048248908', 'dada', '0878048248908', 'Jl. Cijeungjing, Rt 02 / Rw 23', NULL, NULL, 'foto_siswa/66deb6b4a39c2.png', '59c21bf0-5d35-4d52-a866-083446b6adf8', '2024-09-09 08:49:56', '2024-09-13 01:40:22'),
-(18, 'Hari Sukmana', 'harisukmana14@gmail.com', '$2y$12$RwQN0Hh5apKMGtWsuw9M4.2yskji5QzHBTD87fAj.UtmY.JL0cdIi', 'Laki-laki', '2006-07-19', 'U-19', '087848248908', 'dada', '0878048248908', 'Jl. Cijeungjing, Rt 02 / Rw 23', NULL, NULL, 'foto_siswa/66debc96802e0.jpg', '591a479c-7ce0-4259-9156-3d6ac5e515d0', '2024-09-09 09:15:02', '2024-09-12 08:53:56'),
-(19, 'Nova Arianto', 'novaarianto12@gmail.com', '$2y$12$X1.RgPYjXwWrDQEa9RsgWuW6CyVst7i2/7r4kyzzT3b87bx13FTZC', 'Laki-laki', '1995-11-16', NULL, '0867127367261', NULL, NULL, 'Bandung', 'Pelatih Kepala', 'U-19', 'foto_pelatih/66e2b5c6c3aa7.jpg', '0ea90db9-689b-4dc5-8ec7-8931f0faa8f5', '2024-09-12 09:35:06', '2024-09-12 09:35:06');
+(18, 'Hari Sukmana', 'harisukmana14@gmail.com', '$2y$12$RwQN0Hh5apKMGtWsuw9M4.2yskji5QzHBTD87fAj.UtmY.JL0cdIi', 'Laki-laki', '2006-07-19', 'U-19', '087848248908', 'dada', '0878048248908', 'Jl. Cijeungjing, Rt 02 / Rw 23', NULL, NULL, 'foto_siswa/66f52a799e975.jpg', '591a479c-7ce0-4259-9156-3d6ac5e515d0', '2024-09-09 09:15:02', '2024-09-26 09:33:45'),
+(19, 'Nova Arianto', 'novaarianto12@gmail.com', '$2y$12$X1.RgPYjXwWrDQEa9RsgWuW6CyVst7i2/7r4kyzzT3b87bx13FTZC', 'Laki-laki', '1995-11-16', NULL, '0867127367261', NULL, NULL, 'Bandung', 'Pelatih Kepala', 'U-19', 'foto_pelatih/66e2b5c6c3aa7.jpg', '0ea90db9-689b-4dc5-8ec7-8931f0faa8f5', '2024-09-12 09:35:06', '2024-09-12 09:35:06'),
+(21, 'Debrianto Firmansyah', 'debriantofirmansyah15@gmail.com', '$2y$12$/lc13D2DkDKJuL3xstHNAeUhjFiyg7XH1rm7xgg.gzrJM6tIyXb3O', 'Laki-laki', '2000-07-26', NULL, '0812736721', NULL, NULL, 'Bandung', 'Pelatih Kiper', 'U-16', 'foto_pelatih/66f52a1eee8a8.jpg', 'a2a40dac-978b-454d-888b-6cf6ceb430f0', '2024-09-26 02:16:00', '2024-09-26 09:32:15');
 
 --
 -- Indexes for dumped tables
@@ -312,12 +327,6 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `gender`, `date_of_birth
 ALTER TABLE `attendances`
   ADD PRIMARY KEY (`id`),
   ADD KEY `attendances_user_id_foreign` (`user_id`);
-
---
--- Indexes for table `information`
---
-ALTER TABLE `information`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -366,6 +375,12 @@ ALTER TABLE `role_has_permissions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `schedules`
+--
+ALTER TABLE `schedules`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `settingsprofiles`
 --
 ALTER TABLE `settingsprofiles`
@@ -386,25 +401,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT for table `information`
---
-ALTER TABLE `information`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `pengajuanizins`
 --
 ALTER TABLE `pengajuanizins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -425,6 +434,12 @@ ALTER TABLE `role_has_permissions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `schedules`
+--
+ALTER TABLE `schedules`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `settingsprofiles`
 --
 ALTER TABLE `settingsprofiles`
@@ -434,7 +449,7 @@ ALTER TABLE `settingsprofiles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables

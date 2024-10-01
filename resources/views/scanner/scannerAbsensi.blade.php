@@ -1,6 +1,6 @@
 @extends('layout.v_template')
 
-@section('title', 'QR Scanner Latihan')
+@section('title', 'Scanner Presensi')
 @section('content')
 
 <link rel="stylesheet" href="{{ asset('style/qrScanner/qrScanner.css') }}">
@@ -9,7 +9,7 @@
 @if (Cache::get('scanner_visibility', true))
     <div class="scanner-wrapper">
         <div class="scanner-container">
-            <h1>Absensi</h1>
+            <h1>Presensi</h1>
             <select id="attendance-type" class="form-control">
                 <option value="latihan">Latihan</option>
                 <option value="pertandingan">Pertandingan</option>
@@ -28,9 +28,16 @@
 </div>
 @endif
 
-<script src="https://unpkg.com/@zxing/library@latest"></script>
+<!-- Pastikan jQuery dimuat sebelum skrip lainnya -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+<script src="https://unpkg.com/@zxing/library@latest"></script>
+<script src="{{ asset('template/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('template/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('template/bower_components/fastclick/lib/fastclick.js') }}"></script>
+<script src="{{ asset('template/dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset('template/dist/js/demo.js') }}"></script>
 
 <script>
     window.addEventListener('load', function () {
@@ -148,14 +155,13 @@
                         alertShown = true;
                         Swal.fire({
                             icon: 'error',
-                            title: 'Kesalahan',
-                            text: 'Terjadi kesalahan: ' + err.message
-                        }).then(() => {
-                            alertShown = false;
+                            title: 'Error',
+                            text: 'Tidak dapat memulai scanner: ' + err.message
                         });
                     }
                 });
         }
+
         checkLocationPermission();
     });
 </script>

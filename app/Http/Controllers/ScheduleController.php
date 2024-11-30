@@ -18,12 +18,8 @@ class ScheduleController extends Controller
             $query->whereDate('date', $date->format('Y-m-d'));
         }
 
-        if ($request->filled('month')) {
-            $month = (int)$request->input('month');
-            $year = Carbon::now()->year;
-            $query->whereMonth('date', $month)
-                  ->whereYear('date', $year);
-        }
+        $month = $request->filled('month') ? (int)$request->input('month') : Carbon::now()->month;
+        $query->whereMonth('date', $month);
 
         if ($request->filled('type')) {
             $type = $request->input('type');
@@ -46,19 +42,25 @@ class ScheduleController extends Controller
         $validated = $request->validate([
             'title' => 'required',
             'date' => 'required|date',
-            'description' => 'required|max:35',
+            'description' => 'required',
             'time_start' => 'required',
             'time_end' => 'required'
         ],[
             'title.required' => 'Judul Kegiatan Wajib Diisi !!!',
             'date.required' => 'Tanggal Kegiatan Wajib Diisi !!!',
             'description.required' => 'Deskripsi Kegiatan Wajib Diisi !!!',
-            'description.max' => 'Deskripsi Kegiatan Max 35 Huruf !!!',
             'time_start.required' => 'Waktu Mulai Kegiatan Wajib Diisi !!!',
             'time_end.required' => 'Waktu Selesai Kegiatan Wajib Diisi !!!'
         ]);
 
-        Schedule::create($validated);
+        \Log::info('Data yang akan disimpan: ', $validated);
+
+        $schedule = Schedule::create($validated);
+        if ($schedule) {
+            \Log::info('Data berhasil disimpan: ', $schedule->toArray());
+        } else {
+            \Log::error('Gagal menyimpan data.');
+        }
 
         return redirect()->route('schedules.index')->with('success', 'Jadwal berhasil ditambahkan!');
     }
@@ -75,14 +77,13 @@ class ScheduleController extends Controller
         $request->validate([
             'title' => 'required',
             'date' => 'required|date',
-            'description' => 'required|max:35',
+            'description' => 'required',
             'time_start' => 'required',
             'time_end' => 'required'
         ], [
             'title.required' => 'Judul Kegiatan Wajib Diisi !!!',
             'date.required' => 'Tanggal Kegiatan Wajib Diisi !!!',
             'description.required' => 'Deskripsi Kegiatan Wajib Diisi !!!',
-            'description.max' => 'Deskripsi Kegiatan Max 35 Huruf !!!',
             'time_start.required' => 'Waktu Mulai Kegiatan Wajib Diisi !!!',
             'time_end.required' => 'Waktu Selesai Kegiatan Wajib Diisi !!!'
         ]);

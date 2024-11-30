@@ -13,115 +13,170 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function index()
-    {
-        $userName = Auth::user()->name;
-        $userId = Auth::user()->id;
+{
+    $userName = Auth::user()->name;
+    $userId = Auth::user()->id;
 
-        $pendingRequests = Pengajuanizin::where('status', 'pending')->count();
+    $pendingRequests = Pengajuanizin::where('status', 'pending')->count();
 
-        $todayDate = Carbon::today();
-        $attendanceToday = Attendance::whereDate('arrival_at', $todayDate)->count();
+    $todayDate = Carbon::today();
+    $attendanceToday = Attendance::whereDate('arrival_at', $todayDate)->count();
 
-        $schedules = Schedule::all();
+    $schedules = Schedule::all();
 
-        $studentTotalCount = User::whereHas('roles', function($query) {
-            $query->where('name', 'siswa');
-        })->count();
+    $studentTotalCount = User::whereHas('roles', function ($query) {
+        $query->where('name', 'siswa');
+    })->where('status_user', 'Aktif')->count();
 
-        $studentAttendance = [];
-        $months = collect(range(1, 12))->map(function($month) {
-            return Carbon::create()->month($month)->format('F');
-        });
+    $months = collect(range(1, 12))->map(function ($month) {
+        return Carbon::create()->month($month)->format('F');
+    });
 
-        $totalUsers = User::whereHas('roles', function($query) {
-            $query->whereIn('name', ['siswa', 'pelatih']);
-        })->count();
+    $totalUsers = User::whereHas('roles', function ($query) {
+        $query->whereIn('name', ['siswa', 'pelatih']);
+    })->where('status_user', 'Aktif')->count();
 
-        foreach ($months as $month) {
-            $monthNumber = Carbon::parse($month)->month;
+    $studentAttendance = [];
 
-            $studentPresent = Attendance::whereHas('user', function($query) {
-                $query->whereHas('roles', function($query) {
-                    $query->where('name', 'siswa');
-                });
-            })->whereMonth('arrival_at', $monthNumber)->whereNotNull('arrival_at')->count();
+    foreach ($months as $month) {
+        $monthNumber = Carbon::parse($month)->month;
 
-            $studentPercentage = $studentTotalCount > 0 ? ($studentPresent / $studentTotalCount) * 100 : 0;
+        $totalAgenda = Attendance::whereMonth('created_at', $monthNumber)->count();
 
-            $studentAttendance[] = [
-                'month' => $month,
-                'attendance_percentage' => $studentPercentage
-            ];
+        $studentPresent = Attendance::join('users', 'attendances.user_id', '=', 'users.id')
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+            ->where('roles.name', 'siswa')
+            ->where('users.status_user', 'aktif')
+            ->whereMonth('arrival_at', $monthNumber)
+            ->whereNotNull('arrival_at')
+            ->count();
+
+        $studentExcused = Attendance::join('users', 'attendances.user_id', '=', 'users.id')
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+            ->join('pengajuanizins', 'attendances.user_id', '=', 'pengajuanizins.user_id')
+            ->where('roles.name', 'siswa')
+            ->where('users.status_user', 'aktif')
+            ->whereMonth('pengajuanizins.start_date', $monthNumber)
+            ->where('pengajuanizins.status', 'Diterima')
+            ->count();
+
+        $studentTotalCount = User::role('siswa')
+            ->where('status_user', 'aktif')
+            ->count();
+
+        if ($totalAgenda > 0) {
+            $studentPercentage = min((($studentPresent + $studentExcused) / $totalAgenda) * 100, 100);
+        } else {
+            $studentPercentage = 0;
         }
 
-        $pelatihTotalCount = User::whereHas('roles', function($query) {
-            $query->where('name', 'pelatih');
-        })->count();
+        $studentAttendance[] = [
+            'month' => $month,
+            'attendance_percentage' => $studentPercentage,
+            'total_students' => $studentTotalCount,
+        ];
+    }
 
-        $pelatihAttendance = [];
+    $pelatihTotalCount = User::whereHas('roles', function ($query) {
+        $query->where('name', 'pelatih');
+    })->where('status_user', 'Aktif')->count();
 
-        foreach ($months as $month) {
-            $monthNumber = Carbon::parse($month)->month;
+    $pelatihAttendance = [];
 
-            $coachPresent = Attendance::whereHas('user', function($query) {
-                $query->whereHas('roles', function($query) {
-                    $query->where('name', 'pelatih');
-                });
-            })->whereMonth('arrival_at', $monthNumber)->whereNotNull('arrival_at')->count();
+    foreach ($months as $month) {
+        $monthNumber = Carbon::parse($month)->month;
 
-            $coachPercentage = $pelatihTotalCount > 0 ? ($coachPresent / $pelatihTotalCount) * 100 : 0;
+        $totalAgenda = Attendance::whereMonth('created_at', $monthNumber)->count();
 
-            $pelatihAttendance[] = [
-                'month' => $month,
-                'attendance_percentage' => $coachPercentage
-            ];
+        $coachPresent = Attendance::join('users', 'attendances.user_id', '=', 'users.id')
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+            ->where('roles.name', 'pelatih')
+            ->where('users.status_user', 'aktif')
+            ->whereMonth('arrival_at', $monthNumber)
+            ->whereNotNull('arrival_at')
+            ->count();
+
+        $coachExcused = Attendance::join('users', 'attendances.user_id', '=', 'users.id')
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+            ->join('pengajuanizins', 'attendances.user_id', '=', 'pengajuanizins.user_id')
+            ->where('roles.name', 'pelatih')
+            ->where('users.status_user', 'aktif')
+            ->whereMonth('pengajuanizins.start_date', $monthNumber)
+            ->where('pengajuanizins.status', 'Diterima')
+            ->count();
+
+        $pelatihTotalCount = User::role('pelatih')
+            ->where('status_user', 'aktif')
+            ->count();
+
+        if ($totalAgenda > 0) {
+            $coachPercentage = min((($coachPresent + $coachExcused) / $totalAgenda) * 100, 100);
+        } else {
+            $coachPercentage = 0;
         }
 
-        $totalAbsenThisMonth = Attendance::where('user_id', $userId)
-            ->whereMonth('arrival_at', Carbon::now()->month)
-            ->count();
+        $pelatihAttendance[] = [
+            'month' => $month,
+            'attendance_percentage' => $coachPercentage,
+            'total_coaches' => $pelatihTotalCount,
+        ];
+    }
 
-        $totalAgendaThisMonth = Schedule::whereMonth('date', Carbon::now()->month)
-            ->whereYear('date', Carbon::now()->year)
-            ->count();
-
-        $ontimeAttendanceCount = Attendance::where('status_arrival', 'Tepat Waktu')
-            ->whereMonth('arrival_at', Carbon::now()->month)
-            ->count();
-
-        $ontimeAttendancePercentage = $totalUsers > 0 ? ($ontimeAttendanceCount / $totalUsers) * 100 : 0;
-
-        $lateAttendanceCount = Attendance::where('status_arrival', 'Terlambat')
-                ->whereMonth('arrival_at', Carbon::now()->month)
-                ->count();
-
-        $lateAttendancePercentage = $totalUsers > 0 ? ($lateAttendanceCount / $totalUsers) * 100 : 0;
-
-        $ontimeAttendanceCount = Attendance::where('user_id', $userId)
+    $totalAbsenThisMonth = Attendance::where('user_id', $userId)
         ->whereMonth('arrival_at', Carbon::now()->month)
-        ->where('status_arrival', 'Tepat Waktu')
         ->count();
 
-        $ontimePercentageUser = $totalAgendaThisMonth > 0 ? ($ontimeAttendanceCount / $totalAgendaThisMonth) * 100 : 0;
+    $totalAgendaThisMonth = Schedule::whereMonth('date', Carbon::now()->month)
+        ->whereYear('date', Carbon::now()->year)
+        ->count();
 
-        $daysInMonth = Carbon::now()->daysInMonth;
-        $personalAttendancePercentage = $totalAgendaThisMonth > 0 ? ($totalAbsenThisMonth / $totalAgendaThisMonth) * 100 : 0;
+    $ontimeAttendanceCount = Attendance::where('status_arrival', 'Tepat Waktu')
+        ->whereMonth('arrival_at', Carbon::now()->month)->count();
 
-        return view('dashboard.v_dashboard', [
-            'studentCount' => $studentTotalCount,
-            'pelatihCount' => $pelatihTotalCount,
-            'totalUsers' => $totalUsers,
-            'pendingRequests' => $pendingRequests,
-            'attendanceToday' => $attendanceToday,
-            'schedules' => $schedules,
-            'studentAttendance' => $studentAttendance,
-            'pelatihAttendance' => $pelatihAttendance,
-            'totalAbsenThisMonth' => $totalAbsenThisMonth,
-            'personalAttendancePercentage' => $personalAttendancePercentage,
-            'totalAgendaThisMonth' => $totalAgendaThisMonth,
-            'ontimePercentageUser' => $ontimePercentageUser,
-            'ontimeAttendancePercentage' => $ontimeAttendancePercentage,
-            'lateAttendancePercentage' => $lateAttendancePercentage,
-        ]);
-    }
+    $lateAttendanceCount = Attendance::where('status_arrival', 'Terlambat')
+        ->whereMonth('arrival_at', Carbon::now()->month)->count();
+
+    $totalAttendanceThisMonth = $ontimeAttendanceCount + $lateAttendanceCount;
+
+    $ontimeAttendancePercentage = $totalAttendanceThisMonth > 0
+        ? ($ontimeAttendanceCount / $totalAttendanceThisMonth) * 100
+        : 0;
+
+    $lateAttendancePercentage = $totalAttendanceThisMonth > 0
+        ? ($lateAttendanceCount / $totalAttendanceThisMonth) * 100
+        : 0;
+
+    $ontimeAttendanceCountUser = Attendance::where('user_id', $userId)
+        ->whereMonth('arrival_at', Carbon::now()->month)->count();
+
+    $ontimePercentageUser = $totalAgendaThisMonth > 0
+        ? ($ontimeAttendanceCountUser / $totalAgendaThisMonth) * 100
+        : 0;
+
+    $personalAttendancePercentage = $totalAgendaThisMonth > 0
+        ? ($totalAbsenThisMonth / $totalAgendaThisMonth) * 100
+        : 0;
+
+    return view('dashboard.v_dashboard', [
+        'studentCount' => $studentTotalCount,
+        'pelatihCount' => $pelatihTotalCount,
+        'totalUsers' => $totalUsers,
+        'pendingRequests' => $pendingRequests,
+        'attendanceToday' => $attendanceToday,
+        'schedules' => $schedules,
+        'studentAttendance' => $studentAttendance,
+        'pelatihAttendance' => $pelatihAttendance,
+        'totalAbsenThisMonth' => $totalAbsenThisMonth,
+        'personalAttendancePercentage' => $personalAttendancePercentage,
+        'totalAgendaThisMonth' => $totalAgendaThisMonth,
+        'ontimePercentageUser' => $ontimePercentageUser,
+        'ontimeAttendancePercentage' => $ontimeAttendancePercentage,
+        'lateAttendancePercentage' => $lateAttendancePercentage,
+    ]);
+}
+
 }

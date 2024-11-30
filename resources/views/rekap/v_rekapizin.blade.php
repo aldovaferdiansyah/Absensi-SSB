@@ -8,7 +8,7 @@
 <div class="container">
     <div class="header">
         @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('pelatih'))
-            <h1>Rekap Izin</h1>
+            <h1>Laporan Rekap Izin</h1>
             <button class="print-button fa fa-print" onclick="window.print()"> Cetak</button>
         @endif
         @if (auth()->user()->hasRole('siswa'))
@@ -33,11 +33,11 @@
             <label for="date">Pilih Tanggal:</label>
             <input type="date" id="date" name="date" value="{{ request('date') }}" class="one-third-width">
 
-            <label for="month">Pilih Bulan:</label>
+            <label for="month">Pilih Bulan :</label>
             <select id="month" name="month" class="one-third-width">
                 <option value="">-- Semua Bulan --</option>
                 @for ($i = 1; $i <= 12; $i++)
-                    <option value="{{ $i }}" {{ request('month') == $i ? 'selected' : '' }}>
+                    <option value="{{ $i }}" {{ (request('month') == $i || (!request('month') && $i == \Carbon\Carbon::now()->month)) ? 'selected' : '' }}>
                         {{ DateTime::createFromFormat('!m', $i)->format('F') }}
                     </option>
                 @endfor
@@ -69,7 +69,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($izins as $izin)
+            @forelse($izins as $izin)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $izin->name }}</td>
@@ -93,7 +93,11 @@
                     </td>
                     @endif
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="9">Tidak ada data untuk ditampilkan</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

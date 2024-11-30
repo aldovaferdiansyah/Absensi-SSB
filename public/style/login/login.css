@@ -49,6 +49,21 @@
     box-sizing: border-box;
 }
 
+.forgot-password {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.forgot-password a {
+    font-size: 13px;
+    color: #2575fc;
+    font-weight: bold;
+}
+
+.forgot-password a:hover {
+    color: #2525fc;
+}
+
 .btn-primary {
     background-color: #2575fc;
     border-color: #2575fc;
@@ -64,9 +79,9 @@
 }
 
 .logossb img {
-    max-width: 120px; /* Adjust as needed */
+    max-width: 120px;
     height: auto;
-    margin-bottom: 10px; /* Space below the logo */
+    margin-bottom: 10px;
 }
 
 @media (max-width: 480px) {

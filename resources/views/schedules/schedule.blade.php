@@ -22,7 +22,7 @@
             <select id="month" name="month" class="one-third-width">
                 <option value="">-- Semua Bulan --</option>
                 @for ($i = 1; $i <= 12; $i++)
-                    <option value="{{ $i }}" {{ request('month') == $i ? 'selected' : '' }}>
+                    <option value="{{ $i }}" {{ (request('month') == $i || (!request('month') && $i == \Carbon\Carbon::now()->month)) ? 'selected' : '' }}>
                         {{ DateTime::createFromFormat('!m', $i)->format('F') }}
                     </option>
                 @endfor

@@ -30,8 +30,8 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $izin->name }}</td>
                     <td>{{ $izin->role }}</td>
-                    <td>{{ $izin->start_date->format('d M Y') }}</td>
-                    <td>{{ $izin->end_date->format('d M Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($izin->start_date)->format('d M Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($izin->end_date)->format('d M Y') }}</td>
                     <td>{{ $izin->reason }}</td>
                     <td>{{ $izin->type }}</td>
                     <td>
@@ -42,11 +42,21 @@
                         @endif
                     </td>
                     <td>
-                        <form action="{{ route('izin.validate', $izin->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" name="status" value="Diterima" class="btn btn-success fa fa-check-square"> Diterima</button>
-                            <button type="submit" name="status" value="Ditolak" class="btn btn-danger fa fa-window-close"> Ditolak</button>
-                        </form>
+                        @if(auth()->user()->hasRole('pelatih') && $izin->role === 'siswa')
+                            <form action="{{ route('izin.validate', $izin->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" name="status" value="Diterima" class="btn btn-success fa fa-check-square"> Diterima</button>
+                                <button type="submit" name="status" value="Ditolak" class="btn btn-danger fa fa-window-close"> Ditolak</button>
+                            </form>
+                        @elseif(auth()->user()->hasRole('admin') && $izin->role === 'pelatih')
+                            <form action="{{ route('izin.validate', $izin->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" name="status" value="Diterima" class="btn btn-success fa fa-check-square"> Diterima</button>
+                                <button type="submit" name="status" value="Ditolak" class="btn btn-danger fa fa-window-close"> Ditolak</button>
+                            </form>
+                        @else
+                            <span>Tidak ada akses tindakan</span>
+                        @endif
                     </td>
                 </tr>
             @endforeach

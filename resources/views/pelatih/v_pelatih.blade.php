@@ -21,7 +21,8 @@
                 <th>Nama Pelatih</th>
                 <th>Usia</th>
                 <th>Kategori Pelatih</th>
-                <th>Pelatih Kelompok Usia</th>
+                <th>Pelatih Usia</th>
+                <th>Status</th>
                 <th></th>
             </tr>
         </thead>
@@ -35,6 +36,7 @@
                     <td data-label="Jenis Kelamin">{{ $data->gender }}</td>
                     <td data-label="Kategori Pelatih">{{ $data->coach_category }}</td>
                     <td data-label="Pelatih Kelompok Usia">{{ $data->age_group_coach_category }}</td>
+                    <td data-label="Status User">{{ $data->status_user }}</td>
                     <td>
                         @if (auth()->user()->hasRole('admin'))
                             <a href="{{ route('pelatih.qr-code', ['id' => $data->id]) }}" class="action-btn detail-btn fa fa-qrcode"> QR Code</a>

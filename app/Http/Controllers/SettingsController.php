@@ -9,8 +9,8 @@ class SettingsController extends Controller
 {
     public function index()
     {
-        $settings = Setting::first(); // Retrieve the first settings record
-        return view('settings', compact('settings')); // Pass settings to the view
+        $settings = Setting::first();
+        return view('settings', compact('settings'));
     }
 
     public function update(Request $request)
@@ -33,7 +33,7 @@ class SettingsController extends Controller
             if ($settingsprofiles->logo_SSB && file_exists(public_path('foto_logo/' . $settingsprofiles->logo_SSB))) {
                 unlink(public_path('foto_logo/' . $settingsprofiles->logo_SSB));
             }
-            
+
             $image = $request->file('logo_SSB');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('foto_logo'), $imageName);

@@ -10,9 +10,9 @@ class ScannerSettingsController extends Controller
     public function index()
     {
         $scannerVisibility = Cache::get('scanner_visibility', true);
-        $latitude = Cache::get('scanner_latitude', -6.175110); // Default Jakarta
-        $longitude = Cache::get('scanner_longitude', 106.865036); // Default Jakarta
-        $radius = Cache::get('scanner_radius', 100); // Default radius
+        $latitude = Cache::get('scanner_latitude', -6.175110);
+        $longitude = Cache::get('scanner_longitude', 106.865036);
+        $radius = Cache::get('scanner_radius', 100);
 
         return view('settingscanner', compact('scannerVisibility', 'latitude', 'longitude', 'radius'));
     }

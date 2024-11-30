@@ -4,14 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 class Pengajuanizin extends Model
 {
-    use HasFactory;
+    use HasFactory, HasRoles;
 
     protected $table = 'pengajuanizins';
 
     protected $fillable = [
+        'user_id',
         'name',
         'start_date',
         'end_date',
@@ -25,9 +27,4 @@ class Pengajuanizin extends Model
         'start_date' => 'date',
         'end_date' => 'date',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'name', 'name');
-    }
 }

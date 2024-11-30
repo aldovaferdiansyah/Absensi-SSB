@@ -10,7 +10,7 @@ function updateTime() {
 }
 
 let formatTime = (time) => {
-    return time.substring(0, 5); // Ambil 4 angka pertama dari waktu (HH:MM)
+    return time.substring(0, 5);
 };
 
 function createCalendar(month, year, schedules) {

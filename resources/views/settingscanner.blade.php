@@ -7,15 +7,15 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
 <div class="settings-wrapper">
-    @if (auth()->user()->hasRole('pelatih'))
+    @if (auth()->user()->hasRole('admin'))
         <h1>Pengaturan Lokasi</h1>
-    @elseif (auth()->user()->hasRole('siswa'))
+    @elseif (auth()->user()->hasRole('siswa') || auth()->user()->hasRole('pelatih'))
         <h1>Lokasi Lapang</h1>
-    @endif        
+    @endif
 
     <form action="{{ route('settingscanner.update') }}" method="POST">
         @csrf
-        @if (auth()->user()->hasRole('pelatih'))
+        @if (auth()->user()->hasRole('admin'))
             <div class="form-group">
                 <label for="scanner-visibility">Tampilkan Scanner:</label>
                 <select id="scanner-visibility" name="scanner_visibility" class="form-control">
@@ -26,11 +26,11 @@
         @endif
 
         <div class="form-group">
-            @if (auth()->user()->hasRole('pelatih'))
+            @if (auth()->user()->hasRole('admin'))
                 <label for="location_name">Nama Tempat:</label>
-            @elseif (auth()->user()->hasRole('siswa'))
+            @elseif (auth()->user()->hasRole('siswa') || auth()->user()->hasRole('pelatih'))
                 <label for="location_name">Lokasi Lapang:</label>
-            @endif        
+            @endif
             <input type="text" id="location_name" name="location_name" class="form-control" value="{{ old('location_name') }}" readonly>
         </div>
 
@@ -41,7 +41,7 @@
             <input type="hidden" id="longitude" name="longitude" value="{{ $longitude }}">
         </div>
 
-        @if (auth()->user()->hasRole('pelatih'))
+        @if (auth()->user()->hasRole('admin'))
             <div class="form-group">
                 <label for="radius">Radius (meter):</label>
                 <input type="number" id="radius" name="radius" class="form-control" value="{{ $radius }}">

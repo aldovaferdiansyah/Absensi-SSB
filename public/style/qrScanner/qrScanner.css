@@ -1,19 +1,16 @@
-/* Styling untuk wrapper scanner */
 .scanner-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
     margin: 0 auto;
     padding: 0 10px;
     box-sizing: border-box;
 }
 
-/* Styling untuk container scanner */
 .scanner-container {
-    max-width: 500px;
+    max-width: 400px;
     width: 100%;
-    background: linear-gradient(to right, #ffffff, #f7f7f7); /* Gradient background */
+    background: linear-gradient(to right, #ffffff, #f7f7f7);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -21,13 +18,11 @@
     box-sizing: border-box;
 }
 
-/* Styling untuk heading */
 h1 {
     color: #333;
     margin-bottom: 20px;
 }
 
-/* Styling untuk video */
 video {
     width: 100%;
     height: auto;
@@ -35,17 +30,15 @@ video {
     border: 2px solid #ddd;
     margin-bottom: 20px;
     background-color: #000;
-    transition: transform 0.3s ease; /* Animasi saat hover */
+    transition: transform 0.3s ease;
 }
 
-/* Styling untuk footer */
 .footer {
     font-size: 0.9em;
     color: #666;
     margin-top: 10px;
 }
 
-/* Styling untuk select box */
 .form-control {
     width: 100%;
     border-radius: 5px;
@@ -53,7 +46,7 @@ video {
     font-size: 1em;
     margin-bottom: 20px;
     box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transisi saat hover */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .form-control:hover {
@@ -61,7 +54,6 @@ video {
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Styling untuk alert */
 .alert {
     padding: 15px;
     margin: 10px 0;
@@ -93,7 +85,6 @@ video {
     vertical-align: middle;
 }
 
-/* Responsif untuk perangkat dengan ukuran maksimal 768px */
 @media (max-width: 768px) {
     .scanner-container {
         padding: 15px;
@@ -109,7 +100,6 @@ video {
     }
 }
 
-/* Responsif untuk perangkat dengan ukuran maksimal 480px */
 @media (max-width: 480px) {
     .scanner-container {
         padding: 10px;

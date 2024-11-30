@@ -14,8 +14,8 @@ class Schedule extends Model
     protected $table = 'schedules';
     protected $fillable = [
         'title',
-        'description',
         'date',
+        'description',
         'time_start',
         'time_end'
     ];
@@ -23,14 +23,4 @@ class Schedule extends Model
     protected $casts = [
         'date' => 'date',
     ];
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function attendances()
-    {
-        return $this->hasMany(Attendance::class);
-    }
 }

@@ -151,12 +151,18 @@
         @if (auth()->user()->hasRole('pelatih'))
             <li class="{{ request()->is('settingscanner') ? 'active' : '' }}">
                 <a href="{{ route('settingscanner') }}">
-                    <i class="fa fa-cogs"></i> <span>Pengaturan Scanner</span>
+                    <i class="fa fa-cogs"></i> <span>Lihat Jarak Radius Scanner</span>
                 </a>
             </li>
         @endif
 
         @if (auth()->user()->hasRole('admin'))
+            <li class="{{ request()->is('settingscanner') ? 'active' : '' }}">
+                <a href="{{ route('settingscanner') }}">
+                    <i class="fa fa-cogs"></i> <span>Pengaturan Scanner</span>
+                </a>
+            </li>
+
             <li class="{{ request()->is('settings') ? '' : '' }}">
                 <a href="{{ route('settings.index') }}">
                     <i class="fa fa-cog"></i>

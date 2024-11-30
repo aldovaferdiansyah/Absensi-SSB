@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pengajuanizin;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class PengajuanizinController extends Controller
 {
-
     public function index()
     {
         $user = Auth::user();
@@ -29,6 +27,7 @@ class PengajuanizinController extends Controller
         ]);
 
         $izin = new Pengajuanizin();
+        $izin->user_id = Auth::id();
         $izin->name = $request->input('name');
         $izin->role = Auth::user()->getRoleNames()->first();
         $izin->start_date = $request->input('start_date');
@@ -57,17 +56,17 @@ class PengajuanizinController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->hasRole('pelatih')) {
-            $izins = Pengajuanizin::whereHas('user', function ($query) {
-                $query->where('role', 'siswa');
-            })->where('status', 'pending')->get();
-        } elseif ($user->hasRole('admin')) {
-            $izins = Pengajuanizin::whereHas('user', function ($query) {
-                $query->where('role', 'pelatih');
-            })->where('status', 'pending')->get();
-        } else {
-            $izins = Pengajuanizin::where('status', 'pending')->get();
-        }
+    if ($user->hasRole('pelatih')) {
+        $izins = Pengajuanizin::where('role', 'siswa')
+                    ->where('status', 'Pending')
+                    ->get();
+    } elseif ($user->hasRole('admin')) {
+        $izins = Pengajuanizin::where('role', 'pelatih')
+                    ->where('status', 'Pending')
+                    ->get();
+    } else {
+        $izins = [];
+    }
 
         return view('validation.validasi_izin', compact('izins'));
     }

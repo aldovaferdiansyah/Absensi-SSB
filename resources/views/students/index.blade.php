@@ -20,8 +20,9 @@
                 <th>Foto Siswa</th>
                 <th>Nama Siswa</th>
                 <th>Jenis Kelamin</th>
-                <th>Kategori Kelompok Usia</th>
+                <th>Kategori Usia</th>
                 <th>Nomor Telephone</th>
+                <th>Status</th>
                 <th></th>
             </tr>
         </thead>
@@ -35,8 +36,9 @@
                     <td data-label="Jenis Kelamin">{{ $data->gender }}</td>
                     <td data-label="Kategori Kelompok Usia">{{ $data->age_group_category }}</td>
                     <td data-label="Nomor Telephone">{{ $data->phone_number }}</td>
+                    <td data-label="Status User">{{ $data->status_user }}</td>
                     <td>
-                        @if (auth()->user()->hasRole('admin'))
+                        @if (auth()->user()->hasRole('admin') || auth()->user()->hasRole('pelatih'))
                             <a href="{{ route('student.qr-code', ['id' => $data->id]) }}" class="action-btn detail-btn fa fa-qrcode"> Qr Code</a>
                         @endif
                         <a href="/siswa/detail/{{ $data->id }}" class="action-btn detail-btn fa fa-info-circle"> Detail</a>

@@ -31,6 +31,20 @@
     </div>
 
     <div class="form-group">
+        <label>Status User</label>
+        <select id="status_user" name="status_user">
+            <option value="">Pilih Kategori</option>
+            <option value="Aktif" {{ old('status_user', $user->status_user) == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+            <option value="Tidak Aktif" {{ old('status_user', $user->status_user) == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+        </select>
+        <div class="text-danger">
+            @error('status_user')
+                {{ $message }}
+            @enderror
+        </div>
+    </div>
+
+    <div class="form-group">
         <label>Password Baru <strong>(OPSIONAL)</strong></label>
         <input type="password" id="password" placeholder="Silahkan Masukkan Password Baru User ..." name="password">
         <div class="text-danger">

@@ -15,6 +15,13 @@ class RekapizinController extends Controller
 
         $user = Auth::user();
 
+        if ($user->hasRole('pelatih')) {
+            $query->where(function($q) use ($user) {
+                $q->where('role', 'siswa')
+                  ->orWhere('name', $user->name);
+            });
+        }
+
         if ($user->hasrole('siswa')) {
             $userName = $user->name;
             $query->where('name', $userName);
@@ -42,10 +49,8 @@ class RekapizinController extends Controller
             });
         }
 
-        if ($request->filled('month')) {
-            $month = $request->input('month');
-            $query->whereMonth('start_date', $month);
-        }
+        $month = $request->filled('month') ? (int)$request->input('month') : Carbon::now()->month;
+        $query->whereMonth('start_date', $month);
 
         $izins = $query->get();
 

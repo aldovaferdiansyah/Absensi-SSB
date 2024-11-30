@@ -118,7 +118,11 @@ tr:nth-child(even) {
 }
 
 .one-third-width {
-    width: 20.6%;
+    width: 19.5%;
+}
+
+.second-width {
+    width: 39.5%;
 }
 
 .filters label {

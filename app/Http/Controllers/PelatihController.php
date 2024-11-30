@@ -41,20 +41,22 @@ class PelatihController extends Controller
         $query = Attendance::query();
 
         if ($user->hasRole('pelatih')) {
-            $query->where('user_id', $user->id);
+            $query->where('user_id', $user->id)
+                  ->join('users', 'attendances.user_id', '=', 'users.id')
+                  ->select('attendances.*', 'users.name as name');
         } elseif ($user->hasRole('admin')) {
-            $query->whereHas('user.roles', function ($query) {
-                $query->where('name', 'pelatih');
-            });
+            $query->join('users', 'attendances.user_id', '=', 'users.id')
+                ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+                ->where('roles.name', 'pelatih')
+                ->select('attendances.*', 'users.name as name');
         } else {
             return view('errors.index');
         }
 
         if ($request->filled('name')) {
             $name = $request->input('name');
-            $query->whereHas('user', function ($query) use ($name) {
-                $query->where('name', 'like', '%' . $name . '%');
-            });
+            $query->where('users.name', 'like', '%' . $name . '%');
         }
 
         if ($request->filled('date')) {
@@ -62,12 +64,8 @@ class PelatihController extends Controller
             $query->whereDate('arrival_at', $date->format('Y-m-d'));
         }
 
-        if ($request->filled('month')) {
-            $month = (int)$request->input('month');
-            $year = Carbon::now()->year;
-            $query->whereMonth('arrival_at', $month)
-                ->whereYear('arrival_at', $year);
-        }
+        $month = $request->filled('month') ? (int)$request->input('month') : Carbon::now()->month;
+        $query->whereMonth('arrival_at', $month);
 
         if ($request->filled('type')) {
             $type = $request->input('type');

@@ -19,13 +19,23 @@
             <input type="text" id="name" name="name" placeholder="Masukkan Nama ..." value="{{ request('name') }}" class="full-width">
 
             <label for="month">Cari Peran:</label>
-            <select name="role" class="full-width">
+            <select name="role" class="second-width">
                 <option value="">Semua Peran</option>
                     @foreach($roles as $role)
                         <option value="{{ $role->name }}" {{ request('role') == $role->name ? 'selected' : '' }}>
                             {{ ucfirst($role->name) }}
                         </option>
                     @endforeach
+            </select>
+
+            <label for="status_user">Status User:</label>
+            <select name="status_user" class="second-width">
+                <option value="">Pilih Status</option>
+                @foreach($status_user as $status)
+                    <option value="{{ $status }}" {{ request('status_user') == $status ? 'selected' : '' }}>
+                        {{ ucfirst($status) }}
+                    </option>
+                @endforeach
             </select>
 
             <button type="submit" class="filter-button">Tampilkan</button>
@@ -41,6 +51,7 @@
             <tr>
                 <th>Nama</th>
                 <th>Email</th>
+                <th>Status User</th>
                 <th>Hak Akses Sebagai</th>
                 <th></th>
             </tr>
@@ -50,6 +61,7 @@
                 <tr>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+                    <td>{{ $user->status_user }}</td>
                     <td>{{ $user->getRoleNames()->first() }}</td>
                     <td>
                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning fa fa-pencil-square-o"> Edit</a>

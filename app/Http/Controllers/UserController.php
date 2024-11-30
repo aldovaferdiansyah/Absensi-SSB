@@ -15,21 +15,24 @@ class UserController extends Controller
     {
         $query = User::query();
 
-        // Filter berdasarkan nama
         if ($request->has('name') && $request->name != '') {
             $query->where('name', 'like', '%' . $request->name . '%');
         }
 
-        // Filter berdasarkan peran
         if ($request->has('role') && $request->role != '') {
             $query->whereHas('roles', function($q) use ($request) {
                 $q->where('name', $request->role);
             });
         }
 
+        if ($request->has('status_user') && $request->status_user != '') {
+            $query->where('status_user', $request->status_user);
+        }
+
         $users = $query->get();
-        $roles = Role::all(); // Ambil semua peran untuk dropdown filter
-        return view('dataAkun.v_user', compact('users', 'roles'));
+        $roles = Role::all();
+        $status_user = User::distinct()->pluck('status_user');
+        return view('dataAkun.v_user', compact('users', 'roles', 'status_user'));
     }
 
     public function create()
@@ -44,6 +47,7 @@ class UserController extends Controller
             'name' => 'required|max:100',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
+            'status_user' => 'required|in:Aktif,Tidak Aktif',
             'gender' => 'required|in:Laki-laki,Perempuan',
             'date_of_birth' => 'required|date',
             'address' => 'required',
@@ -65,6 +69,7 @@ class UserController extends Controller
             'password.min' => 'Password Default User Min 8 karakter !!',
             'role.required' => 'Hak Akses User Wajib Diisi !!',
             'gender.required' => 'Jenis Kelamin User Wajib Diisi !!',
+            'status_user.required' => 'Status User Wajib Diisi !!',
             'date_of_birth.required' => 'Tanggal Lahir Wajib Diisi !!',
             'address.required' => 'Alamat Wajib Diisi !!',
             'phone_number.required' => 'Nomor Telephone Wajib Diisi !!',
@@ -94,6 +99,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'status_user' => $request->status_user,
             'gender' => $request->gender,
             'date_of_birth' => $request->date_of_birth,
             'address' => $request->address,
@@ -125,6 +131,7 @@ class UserController extends Controller
             'name' => 'required|max:100',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'nullable|min:8',
+            'status_user' => 'nullable|in:Aktif,Tidak Aktif',
             'role' => 'required|exists:roles,name',
             'gender' => 'nullable|in:Laki-laki,Perempuan',
             'date_of_birth' => 'nullable|date',
@@ -177,6 +184,7 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'status_user' => $request->status_user,
             'gender' => $request->gender,
             'date_of_birth' => $request->date_of_birth,
             'age_group_category' => $request->age_group_category,

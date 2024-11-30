@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingsController;
@@ -41,6 +42,8 @@ Route::get('/dashboard.v_dashboard',[DashboardController::class, 'index'])->name
 Route::get('/rekap.v_rekapizin', [RekapizinController::class, 'index'])->name('rekapizin.index')->middleware(['auth', 'verified']);
 // Route untuk menampilkan rekap absensi Siswa
 Route::get('/attendances/absenSiswa', [StudentController::class, 'showAbsenSiswa'])->name('attendances.absenSiswa')->middleware(['auth', 'verified']);
+// Route untuk menampilkan lokasi
+Route::get('/settingscanner', [ScannerSettingsController::class, 'index'])->name('settingscanner')->middleware(['auth', 'verified']);
 
 // Hak akses admin
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
@@ -60,8 +63,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/generate-user-qr-codes', [QrCodeController::class, 'generateForUsers'])->name('generate.user.qr.codes');
     // Route untuk QR Code Pelatih
     Route::get('/pelatih/qr-code/{id}', [PelatihController::class, 'qrCode'])->name('pelatih.qr-code');
-    // Route untuk QR Code Siswa
-    Route::get('/student/qr-code/{id}', [StudentController::class, 'qrCode'])->name('student.qr-code');
 
     // Route untuk menampilkan halaman setting data SSB
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
@@ -69,6 +70,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
     // Route untuk report pelatih
     Route::get('/report/pelatih', [PelatihController::class, 'report'])->name('report.pelatih');
+    // Route untuk menyimpan lokasi
+    Route::post('/settingscanner/update', [ScannerSettingsController::class, 'updateSettings'])->name('settingscanner.update');
 });
 
 // Hak akses pelatih dan admin
@@ -92,6 +95,8 @@ Route::middleware(['auth', 'verified', 'role:pelatih|admin'])->group(function ()
     Route::get('/students.index', [StudentController::class, 'index'])->name('students.index');
     // Rute untuk menampilkan halaman detail siswa
     Route::get('/siswa/detail/{id}',[StudentController::class, 'detail']);
+    // Route untuk QR Code Siswa
+    Route::get('/student/qr-code/{id}', [StudentController::class, 'qrCode'])->name('student.qr-code');
 
     Route::get('/validasi-izin', [PengajuanizinController::class, 'validateIndex'])->name('izin.validate.index');
     Route::post('/validasi-izin/{id}', [PengajuanizinController::class, 'validateRequest'])->name('izin.validate');
@@ -99,7 +104,6 @@ Route::middleware(['auth', 'verified', 'role:pelatih|admin'])->group(function ()
     // Route untuk menampilkan rekap absensi Pelatih
     Route::get('/attendances/absenPelatih', [PelatihController::class, 'showAbsenPelatih'])->name('attendances.absenPelatih');
 });
-
 
 // Hak akses siswa dan admin
 Route::middleware(['auth', 'verified', 'role:siswa|admin'])->group(function () {
@@ -127,10 +131,6 @@ Route::middleware(['auth', 'verified', 'role:siswa|pelatih'])->group(function ()
     Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password.post');
     // Route untuk mengecek lokasi
     Route::get('scanner/coordinates', [QrScannerController::class, 'getCoordinates'])->name('scanner.coordinates');
-    // Route untuk menampilkan lokasi
-    Route::get('/settingscanner', [ScannerSettingsController::class, 'index'])->name('settingscanner');
-    // Route untuk menyimpan lokasi
-    Route::post('/settingscanner/update', [ScannerSettingsController::class, 'updateSettings'])->name('settingscanner.update');
     // Route untuk menampilkan halaman Pengajuan Izin
     Route::get('/permission.pengajuanizin', [PengajuanizinController::class, 'index'])->name('pengajuanizin.index');
     // Route untuk menyimpan data pengajuan izin

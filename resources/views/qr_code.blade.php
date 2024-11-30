@@ -39,7 +39,9 @@
     </div>
 
     <div class="button-group">
-        <a class="button-link" onclick="window.print()">Cetak Kartu Absensi</a>
+        @if (auth()->user()->hasRole('admin'))
+            <a class="button-link" onclick="window.print()">Cetak Kartu Absensi</a>
+        @endif
         @if (isset($pelatih))
             <a href="{{ route('pelatih.index') }}" class="button-link">Kembali ke Daftar Pelatih</a>
         @elseif (isset($student))

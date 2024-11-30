@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
     public function up()
     {
         Schema::create('pengajuanizins', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('role');
             $table->date('start_date');
@@ -18,11 +18,12 @@ return new class extends Migration
             $table->text('reason');
             $table->string('type');
             $table->string('proof')->nullable();
-            $table->string('status')->default('pending'); 
+            $table->string('status')->default('pending');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
-
 
     public function down()
     {

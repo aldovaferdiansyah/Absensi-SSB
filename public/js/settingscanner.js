@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('Peramban ini tidak mendukung geolokasi.');
     }
 
-    if (userRole === 'pelatih') {
+    if (userRole === 'admin') {
         map.on('click', function(e) {
             var lat = e.latlng.lat;
             var lng = e.latlng.lng;

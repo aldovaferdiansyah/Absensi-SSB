@@ -153,7 +153,7 @@
                 <option value="U-16" {{ old('age_group_category', $user->age_group_category) == 'U-16' ? 'selected' : '' }}>U-16</option>
                 <option value="U-19" {{ old('age_group_category', $user->age_group_category) == 'U-19' ? 'selected' : '' }}>U-19</option>
                 <option value="U-21" {{ old('age_group_category', $user->age_group_category) == 'U-21' ? 'selected' : '' }}>U-21</option>
-                <option value="Senior" {{ old('age_group_category', $user->age_group_category) == 'Senior' ? 'selected' : '' }}>Senior</option>
+                <option value="U-23" {{ old('age_group_category', $user->age_group_category) == 'U-23' ? 'selected' : '' }}>U-23</option>
             </select>
             <div class="text-danger">
                 @error('age_group_category')
@@ -210,7 +210,7 @@
                 <option value="U-16" {{ old('age_group_coach_category', $user->age_group_coach_category) == 'U-16' ? 'selected' : '' }}>U-16</option>
                 <option value="U-19" {{ old('age_group_coach_category', $user->age_group_coach_category) == 'U-19' ? 'selected' : '' }}>U-19</option>
                 <option value="U-21" {{ old('age_group_coach_category', $user->age_group_coach_category) == 'U-21' ? 'selected' : '' }}>U-21</option>
-                <option value="Senior" {{ old('age_group_coach_category', $user->age_group_coach_category) == 'Senior' ? 'selected' : '' }}>Senior</option>
+                <option value="U-23" {{ old('age_group_coach_category', $user->age_group_coach_category) == 'U-23' ? 'selected' : '' }}>U-23</option>
             </select>
             <div class="text-danger">
                 @error('age_group_coach_category')

@@ -24,6 +24,7 @@ table {
 
 th, td {
     padding: 12px;
+    font-size: 14px;
     border-bottom: 1px solid #ddd;
     text-align: left;
     color: #555;
@@ -55,6 +56,7 @@ tr:nth-child(even) {
 .btn:hover {
     background-color: #0056b3;
     transform: translateY(-2px);
+    color: white;
 }
 
 .action-btn {
@@ -95,6 +97,16 @@ tr:nth-child(even) {
 
 .detail-btn:hover {
     background-color: #138496;
+}
+
+.kehadiran_siswa-btn {
+    background-color: rgb(3, 168, 3);
+    color: white;
+}
+
+.kehadiran_siswa-btn:hover {
+    background-color: rgb(1, 92, 1);
+    color: white;
 }
 
 img {

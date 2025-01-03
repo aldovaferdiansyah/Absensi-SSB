@@ -59,9 +59,9 @@ class PelatihController extends Controller
             $query->where('users.name', 'like', '%' . $name . '%');
         }
 
-        if ($request->filled('date')) {
-            $date = Carbon::parse($request->input('date'));
-            $query->whereDate('arrival_at', $date->format('Y-m-d'));
+        if ($request->filled('year')) {
+            $currentYear = (int) $request->input('year');
+            $query->whereYear('arrival_at', $currentYear);
         }
 
         $month = $request->filled('month') ? (int)$request->input('month') : Carbon::now()->month;

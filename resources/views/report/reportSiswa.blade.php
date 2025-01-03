@@ -29,10 +29,9 @@
                     @endfor
                 </select>
 
-
-                <label for="year">Tahun:</label>
+                <label for="year">Pilih Tahun:</label>
                 <select name="year" id="year" class="one-third-width">
-                    @for ($i = Carbon\Carbon::now()->year; $i >= 2000; $i--)
+                    @for ($i = Carbon\Carbon::now()->year; $i >= 2020; $i--)
                         <option value="{{ $i }}" {{ (request('year') == $i) ? 'selected' : '' }}>
                             {{ $i }}
                         </option>

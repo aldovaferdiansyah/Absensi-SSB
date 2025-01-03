@@ -30,15 +30,21 @@
             @endif
 
             <div class="other-filters">
-                <label for="date">Pilih Tanggal:</label>
-                <input type="date" id="date" name="date" value="{{ request('date') }}" class="one-third-width">
-
                 <label for="month">Pilih Bulan :</label>
                 <select id="month" name="month" class="one-third-width">
                     <option value="">-- Semua Bulan --</option>
                     @for ($i = 1; $i <= 12; $i++)
                         <option value="{{ $i }}" {{ (request('month') == $i || (!request('month') && $i == \Carbon\Carbon::now()->month)) ? 'selected' : '' }}>
                             {{ DateTime::createFromFormat('!m', $i)->format('F') }}
+                        </option>
+                    @endfor
+                </select>
+
+                <label for="year">Pilih Tahun:</label>
+                <select name="year" id="year" class="one-third-width">
+                    @for ($i = Carbon\Carbon::now()->year; $i >= 2020; $i--)
+                        <option value="{{ $i }}" {{ (request('year') == $i) ? 'selected' : '' }}>
+                            {{ $i }}
                         </option>
                     @endfor
                 </select>

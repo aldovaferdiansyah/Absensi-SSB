@@ -42,8 +42,13 @@ Route::get('/dashboard.v_dashboard',[DashboardController::class, 'index'])->name
 Route::get('/rekap.v_rekapizin', [RekapizinController::class, 'index'])->name('rekapizin.index')->middleware(['auth', 'verified']);
 // Route untuk menampilkan rekap absensi Siswa
 Route::get('/attendances/absenSiswa', [StudentController::class, 'showAbsenSiswa'])->name('attendances.absenSiswa')->middleware(['auth', 'verified']);
-// Route untuk menampilkan lokasi
+ // Route untuk menampilkan lokasi
 Route::get('/settingscanner', [ScannerSettingsController::class, 'index'])->name('settingscanner')->middleware(['auth', 'verified']);
+// Route untuk melakukan presensi kedatangan siswa oleh pelatih menggunakan tombol
+Route::post('/pelatih/attendance/manual', [QrScannerController::class, 'manualAttendance']);
+// Route untuk melakukan presensi kepulangan siswa oleh pelatih menggunakan tombol
+Route::post('/pelatih/departure/manual', [QrScannerController::class, 'manualDeparture']);
+
 
 // Hak akses admin
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
@@ -70,7 +75,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
     // Route untuk report pelatih
     Route::get('/report/pelatih', [PelatihController::class, 'report'])->name('report.pelatih');
-    // Route untuk menyimpan lokasi
+
+    // Route untuk menyimpan perubahan lokasi scanner
     Route::post('/settingscanner/update', [ScannerSettingsController::class, 'updateSettings'])->name('settingscanner.update');
 });
 

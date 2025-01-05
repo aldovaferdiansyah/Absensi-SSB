@@ -225,6 +225,8 @@ class QrScannerController extends Controller
     public function manualAttendance(Request $request)
     {
         try {
+            $today = Carbon::today();
+
             $user = User::find($request->user_id);
             if (!$user) {
                 return response()->json(['error' => 'Data siswa tidak ditemukan.'], 404);
@@ -232,30 +234,21 @@ class QrScannerController extends Controller
 
             if ($user->status_user === 'Tidak Aktif') {
                 return response()->json(['error' => 'Status siswa tidak aktif, tidak dapat melakukan presensi.'], 400);
+            }
+
+            $izinSiswa = Pengajuanizin::where('user_id', $user->id)
+                          ->where('status', 'Diterima')
+                          ->whereDate('start_date', '<=', $today)
+                          ->whereDate('end_date', '>=', $today)
+                          ->exists();
+
+            if ($izinSiswa) {
+                return response()->json(['error' => 'Siswa ini sedang izin dan tidak dapat dicatat kehadirannya hari ini.'], 400);
             }
 
             return $this->recordAttendanceManual($user, 'siswa', 'arrival_at');
         } catch (\Exception $e) {
             \Log::error('Error in manualAttendance: ' . $e->getMessage());
-            return response()->json(['error' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
-        }
-    }
-
-    public function manualDeparture(Request $request)
-    {
-        try {
-            $user = User::find($request->user_id);
-            if (!$user) {
-                return response()->json(['error' => 'Data siswa tidak ditemukan.'], 404);
-            }
-
-            if ($user->status_user === 'Tidak Aktif') {
-                return response()->json(['error' => 'Status siswa tidak aktif, tidak dapat melakukan presensi.'], 400);
-            }
-
-            return $this->recordAttendanceManual($user, 'siswa', 'departure_at');
-        } catch (\Exception $e) {
-            \Log::error('Error in manualDeparture: ' . $e->getMessage());
             return response()->json(['error' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
         }
     }

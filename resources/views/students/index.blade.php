@@ -58,11 +58,7 @@
                     <td>
                         <button type="button" class="action-btn kehadiran_siswa-btn fa fa-check-circle"
                                 onclick="manualAttendance({{ $data->id }}, 'arrival_at')" data-user-id="{{ $data->id }}">
-                            Kedatangan
-                        </button>
-                        <button type="button" class="action-btn kehadiran_siswa-btn fa fa-check-circle"
-                                onclick="manualDeparture({{ $data->id }}, 'departure_at')" data-user-id="{{ $data->id }}">
-                            Kepulangan
+                            Presensikan Siswa
                         </button>
                     </td>
                     @endif
@@ -78,46 +74,6 @@ function manualAttendance(userId, type) {
     let token = '{{ csrf_token() }}';
 
     fetch('/pelatih/attendance/manual', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': token
-        },
-        body: JSON.stringify({
-            user_id: userId,
-            type: type
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil',
-                text: data.success
-            });
-        } else if (data.error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal',
-                text: data.error
-            });
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Kesalahan',
-            text: 'Terjadi kesalahan saat memproses permintaan.'
-        });
-    });
-}
-
-function manualDeparture(userId, type) {
-    let token = '{{ csrf_token() }}';
-
-    fetch('/pelatih/departure/manual', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

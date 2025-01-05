@@ -44,11 +44,6 @@ Route::get('/rekap.v_rekapizin', [RekapizinController::class, 'index'])->name('r
 Route::get('/attendances/absenSiswa', [StudentController::class, 'showAbsenSiswa'])->name('attendances.absenSiswa')->middleware(['auth', 'verified']);
  // Route untuk menampilkan lokasi
 Route::get('/settingscanner', [ScannerSettingsController::class, 'index'])->name('settingscanner')->middleware(['auth', 'verified']);
-// Route untuk melakukan presensi kedatangan siswa oleh pelatih menggunakan tombol
-Route::post('/pelatih/attendance/manual', [QrScannerController::class, 'manualAttendance']);
-// Route untuk melakukan presensi kepulangan siswa oleh pelatih menggunakan tombol
-Route::post('/pelatih/departure/manual', [QrScannerController::class, 'manualDeparture']);
-
 
 // Hak akses admin
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
@@ -68,14 +63,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/generate-user-qr-codes', [QrCodeController::class, 'generateForUsers'])->name('generate.user.qr.codes');
     // Route untuk QR Code Pelatih
     Route::get('/pelatih/qr-code/{id}', [PelatihController::class, 'qrCode'])->name('pelatih.qr-code');
-
     // Route untuk menampilkan halaman setting data SSB
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::post('/settings/update', [SettingsController::class, 'update'])->name('settings.update');
-
     // Route untuk report pelatih
     Route::get('/report/pelatih', [PelatihController::class, 'report'])->name('report.pelatih');
-
     // Route untuk menyimpan perubahan lokasi scanner
     Route::post('/settingscanner/update', [ScannerSettingsController::class, 'updateSettings'])->name('settingscanner.update');
 });
@@ -96,17 +88,14 @@ Route::middleware(['auth', 'verified', 'role:pelatih|admin'])->group(function ()
     Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedules.update');
     // Route untuk menghapus data jadwal
     Route::delete('/schedule/{id}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
-
     // Route untuk menampilkan halaman daftar siswa
     Route::get('/students.index', [StudentController::class, 'index'])->name('students.index');
     // Rute untuk menampilkan halaman detail siswa
     Route::get('/siswa/detail/{id}',[StudentController::class, 'detail']);
     // Route untuk QR Code Siswa
     Route::get('/student/qr-code/{id}', [StudentController::class, 'qrCode'])->name('student.qr-code');
-
     Route::get('/validasi-izin', [PengajuanizinController::class, 'validateIndex'])->name('izin.validate.index');
     Route::post('/validasi-izin/{id}', [PengajuanizinController::class, 'validateRequest'])->name('izin.validate');
-
     // Route untuk menampilkan rekap absensi Pelatih
     Route::get('/attendances/absenPelatih', [PelatihController::class, 'showAbsenPelatih'])->name('attendances.absenPelatih');
 });
@@ -141,6 +130,11 @@ Route::middleware(['auth', 'verified', 'role:siswa|pelatih'])->group(function ()
     Route::get('/permission.pengajuanizin', [PengajuanizinController::class, 'index'])->name('pengajuanizin.index');
     // Route untuk menyimpan data pengajuan izin
     Route::post('/permission.pengajuanizin', [PengajuanizinController::class, 'store'])->name('izin.submit');
+});
+
+Route::middleware(['auth', 'verified', 'role:pelatih'])->group(function () {
+    // Route untuk melakukan presensi kedatangan siswa oleh pelatih menggunakan tombol
+    Route::post('/pelatih/attendance/manual', [QrScannerController::class, 'manualAttendance']);
 });
 
 require __DIR__.'/auth.php';

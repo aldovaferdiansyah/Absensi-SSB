@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2025 at 10:06 AM
+-- Generation Time: Jan 05, 2025 at 07:55 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -71,7 +71,14 @@ INSERT INTO `attendances` (`id`, `user_id`, `name`, `role`, `type`, `arrival_at`
 (67, 29, 'Insan Ramdani', 'siswa', 'pertandingan', '2024-11-16 13:40:27', 'Tepat Waktu', '2024-11-16 14:15:02', 'Tepat Waktu', '2024-11-16 13:40:27', '2024-11-16 14:15:02'),
 (68, 30, 'Rafli Mahendra', 'siswa', 'pertandingan', '2024-11-16 13:40:46', 'Tepat Waktu', '2024-11-16 14:15:15', 'Tepat Waktu', '2024-11-16 13:40:46', '2024-11-16 14:15:15'),
 (69, 26, 'Komarudin Zaelani', 'pelatih', 'pertandingan', '2024-11-16 13:42:05', 'Tepat Waktu', '2024-11-16 14:21:07', 'Tepat Waktu', '2024-11-16 13:42:05', '2024-11-16 14:21:07'),
-(71, 14, 'Aldova Ferdiansyah', 'pelatih', 'latihan', '2024-11-20 06:00:31', 'Tepat Waktu', NULL, NULL, '2024-11-20 06:00:31', '2024-11-20 06:00:31');
+(71, 14, 'Aldova Ferdiansyah', 'pelatih', 'latihan', '2024-11-20 06:00:31', 'Tepat Waktu', NULL, NULL, '2024-11-20 06:00:31', '2024-11-20 06:00:31'),
+(81, 14, 'Aldova Ferdiansyah', 'pelatih', 'latihan', '2025-01-05 06:01:19', 'Tepat Waktu', '2025-01-05 06:46:34', 'Tepat Waktu', '2025-01-05 06:01:19', '2025-01-05 06:46:34'),
+(82, 17, 'Andri Sopian', 'siswa', 'latihan', '2025-01-05 06:01:51', 'Tepat Waktu', '2025-01-05 06:47:43', 'Tepat Waktu', '2025-01-05 06:01:51', '2025-01-05 06:47:43'),
+(83, 18, 'Hari Sukmana', 'siswa', 'latihan', '2025-01-05 06:02:45', 'Tepat Waktu', '2025-01-05 06:47:54', 'Tepat Waktu', '2025-01-05 06:02:45', '2025-01-05 06:47:54'),
+(84, 30, 'Rafli Mahendra', 'siswa', 'latihan', '2025-01-05 06:03:14', 'Tepat Waktu', '2025-01-05 06:47:14', 'Tepat Waktu', '2025-01-05 06:03:14', '2025-01-05 06:47:14'),
+(85, 24, 'Supratman Samsudin', 'siswa', 'latihan', '2025-01-05 06:03:42', 'Tepat Waktu', '2025-01-05 06:48:24', 'Tepat Waktu', '2025-01-05 06:03:42', '2025-01-05 06:48:24'),
+(86, 19, 'Nova Arianto', 'pelatih', 'latihan', '2025-01-05 06:05:58', 'Tepat Waktu', NULL, NULL, '2025-01-05 06:05:58', '2025-01-05 06:05:58'),
+(87, 25, 'Ahmad Mulyono', 'pelatih', 'latihan', '2025-01-05 06:07:23', 'Tepat Waktu', NULL, NULL, '2025-01-05 06:07:23', '2025-01-05 06:07:23');
 
 -- --------------------------------------------------------
 
@@ -169,7 +176,6 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (2, 'App\\Models\\User', 28),
 (2, 'App\\Models\\User', 29),
 (2, 'App\\Models\\User', 30),
-(2, 'App\\Models\\User', 36),
 (3, 'App\\Models\\User', 14),
 (3, 'App\\Models\\User', 19),
 (3, 'App\\Models\\User', 25),
@@ -206,7 +212,9 @@ INSERT INTO `pengajuanizins` (`id`, `user_id`, `name`, `role`, `start_date`, `en
 (5, 25, 'Ahmad Mulyono', 'pelatih', '2024-11-12', '2024-11-12', 'Asam Urat Kambuh', 'sakit', '1731346024_proof_image.png', 'Diterima', '2024-11-11 17:27:04', '2024-11-11 17:28:41'),
 (7, 14, 'Aldova Ferdiansyah', 'pelatih', '2024-11-17', '2024-11-17', 'Sakit Asam Lambung', 'sakit', '1731845220_proof_file.pdf', 'Ditolak', '2024-11-17 12:07:00', '2024-11-20 01:55:28'),
 (8, 17, 'Andri Sopian', 'siswa', '2024-11-17', '2024-11-17', 'Sakit Engkel Kaki Kanan', 'sakit', '1731845322_proof_file.pdf', 'Ditolak', '2024-11-17 12:08:42', '2024-11-20 02:17:42'),
-(9, 17, 'Andri Sopian', 'siswa', '2024-11-20', '2024-11-20', 'Sakit Perut, Asam Lambung naik', 'sakit', '1732081735_proof_image.png', 'Diterima', '2024-11-20 05:48:55', '2024-11-20 05:49:48');
+(9, 17, 'Andri Sopian', 'siswa', '2024-11-20', '2024-11-20', 'Sakit Perut, Asam Lambung naik', 'sakit', '1732081735_proof_image.png', 'Diterima', '2024-11-20 05:48:55', '2024-11-20 05:49:48'),
+(10, 26, 'Komarudin Zaelani', 'pelatih', '2025-01-05', '2025-01-05', 'Sakit demam tinggi', 'sakit', '1736058041_proof_image.png', 'Diterima', '2025-01-05 06:20:41', '2025-01-05 06:27:51'),
+(11, 29, 'Insan Ramdani', 'siswa', '2025-01-05', '2025-01-05', 'Sakit Cedera Engkel Kaki Sebelah Kanan', 'sakit', '1736058759_proof_image.png', 'Diterima', '2025-01-05 06:32:40', '2025-01-05 06:33:24');
 
 -- --------------------------------------------------------
 
@@ -285,7 +293,8 @@ INSERT INTO `schedules` (`id`, `title`, `description`, `date`, `time_start`, `ti
 (9, 'Latihan', 'Latihan Rutinan Lapang Cihaur B2', '2024-10-01', '11:45:00', '13:45:00', '2024-10-01 04:15:01', '2024-10-01 04:15:42'),
 (14, 'Latihan', 'Latihan Rutinan Lapang Siliwangi A1', '2024-11-12', '00:30:00', '01:30:00', '2024-11-11 16:04:39', '2024-11-16 09:03:04'),
 (19, 'Pertandingan', 'Pertandingan VS Maung Anom', '2024-11-16', '20:45:00', '21:30:00', '2024-11-16 09:24:59', '2024-11-16 13:12:16'),
-(21, 'Latihan', 'Latihan Rutinan Lapang Siliwangi A1', '2024-11-20', '13:15:00', '14:15:00', '2024-11-20 05:55:40', '2024-11-20 05:56:31');
+(21, 'Latihan', 'Latihan Rutinan Lapang Siliwangi A1', '2024-11-20', '13:15:00', '14:15:00', '2024-11-20 05:55:40', '2024-11-20 05:56:31'),
+(25, 'Latihan', 'Latihan Rutinan Lapang Siliwangi A1', '2025-01-05', '13:15:00', '14:15:00', '2025-01-05 05:55:00', '2025-01-05 05:55:00');
 
 -- --------------------------------------------------------
 
@@ -350,12 +359,11 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `status_user`, `gender`,
 (18, 'Hari Sukmana', 'harisukmana14@gmail.com', '$2y$12$RwQN0Hh5apKMGtWsuw9M4.2yskji5QzHBTD87fAj.UtmY.JL0cdIi', 'Aktif', 'Laki-laki', '2006-07-19', 'U-19', '087848248908', 'dada', '0878048248908', 'Jl. Cijeungjing, Rt 02 / Rw 23', NULL, NULL, 'foto_siswa/66f52a799e975.jpg', '591a479c-7ce0-4259-9156-3d6ac5e515d0', '2024-09-09 09:15:02', '2024-09-26 09:33:45'),
 (19, 'Nova Arianto', 'novaarianto12@gmail.com', '$2y$12$X1.RgPYjXwWrDQEa9RsgWuW6CyVst7i2/7r4kyzzT3b87bx13FTZC', 'Aktif', 'Laki-laki', '1995-11-16', NULL, '0867127367261', NULL, NULL, 'Bandung', 'Pelatih Kepala', 'U-19', 'foto_pelatih/66e2b5c6c3aa7.jpg', '0ea90db9-689b-4dc5-8ec7-8931f0faa8f5', '2024-09-12 09:35:06', '2024-10-04 14:15:50'),
 (24, 'Supratman Samsudin', 'supratman17@gmail.com', '$2y$12$kfkOh9J8c0d7DgFZB29hGOvzOMqocqbLrN5g2lWhJWwVc0r5LEgJW', 'Aktif', 'Laki-laki', '2004-07-22', 'U-21', '081273672137', 'Sulaiman Baharudin', '0813448297777', 'Kp. Ciburial Mekar RT 07 RW 16 Desa Margajaya Kec.Ngamprah', NULL, NULL, 'foto_siswa/6727c4534b1c2.jpg', '5aa270f5-5214-4b87-a735-5bcf61eee9a1', '2024-11-03 18:43:31', '2024-11-11 15:34:06'),
-(25, 'Ahmad Mulyono', 'ahmadmulyono19@gmail.com', '$2y$12$QzU6H68pudJxXFQwd3RaweAVVRiKghzpOqsHq0K3alrFIjp6dFL92', 'Aktif', 'Laki-laki', '1995-07-11', NULL, '0867127363521', NULL, NULL, 'Kp. SukaKaya RT 01 RW 16 Desa Makmur Kec.Suryakencana', 'Pelatih Kepala', 'U-21', 'foto_pelatih/67321fcde2938.jpg', '86063e1b-b846-4da4-9558-ede4e5931539', '2024-11-11 15:16:33', '2024-11-16 09:38:56'),
+(25, 'Ahmad Mulyono', 'ahmadmulyono19@gmail.com', '$2y$12$fCfptaqLq25aqpMALgI3Ken.0rMBRsIGsdY.OGiTxobZwU9L991F6', 'Aktif', 'Laki-laki', '1995-07-11', NULL, '0867127363521', NULL, NULL, 'Kp. SukaKaya RT 01 RW 16 Desa Makmur Kec.Suryakencana', 'Pelatih Kepala', 'U-21', 'foto_pelatih/67321fcde2938.jpg', '86063e1b-b846-4da4-9558-ede4e5931539', '2024-11-11 15:16:33', '2025-01-05 06:09:25'),
 (26, 'Komarudin Zaelani', 'komarudin90@gmail.com', '$2y$12$d22mrwX5d7cqa.hSmiPR/OKsdVXPiC6179Uwqbm3l1T/.NMnIpGBG', 'Aktif', 'Laki-laki', '1985-03-21', NULL, '082489458012', NULL, NULL, 'Kp. Kencana RT 03 RW 12, Desa Jayamaju Kec. Ketambun', 'Pelatih Kepala', 'U-23', 'foto_pelatih/6732211200c65.jpg', 'e4a7be06-7221-417d-a0ac-1e4a6a2b5f93', '2024-11-11 15:20:52', '2024-12-18 07:02:55'),
 (28, 'Akbar Mulyana', 'akbarmulyana15@gmail.com', '$2y$12$MOXASCeHhTPgmRXU9CDN2eZ6EAoZHXJNttaY6.b8.4zT/hxz4mvvW', 'Aktif', 'Laki-laki', '2004-07-22', 'U-23', '0867127427779', 'Saepul Anwar Baharudin', '0812779393572', 'Kp. Cahayamakmur RT 09 RW 13, Desa Kermata Kec. Jayadiri', NULL, NULL, 'foto_siswa/673223c2804a4.jpg', 'c9ad1bfc-dbaf-4491-b511-81b411c07d10', '2024-11-11 15:33:23', '2024-12-18 07:05:50'),
 (29, 'Insan Ramdani', 'insanramdani17@gmail.com', '$2y$12$SBYhTB8GKrrZwOQAHSwECuto.UDyUU/g7aonijPozb8TNXGOhwQn.', 'Aktif', 'Laki-laki', '2002-03-14', 'U-23', '081255817772', 'Asepudin Anwarudin', '0815334297853', 'Kp. Ciburial Mekar RT 01 RW 16 Desa Margajaya Kec.Ngamprah', NULL, NULL, 'foto_siswa/6732249e16c07.jpg', '682b1aad-7e87-484e-a5ca-5089b8b8f404', '2024-11-11 15:37:02', '2024-12-18 07:07:00'),
-(30, 'Rafli Mahendra', 'raflimahendra20@gmail.com', '$2y$12$qUr4xaCg9YySYHhd9RrSE.erLdLYu1mH9SdAikYd.IWMdRlx5uOVK', 'Aktif', 'Laki-laki', '2006-07-30', 'U-19', '085614746826', 'Mulyadi Sulaimansyah', '081233677967', 'Kp. Ciburial Mekar RT 02 RW 07 Desa Margajaya Kec.Ngamprah', NULL, NULL, 'foto_siswa/673225fa9bba0.jpg', '4aed6ff5-3fb2-4ba7-9394-13dfb20bbeab', '2024-11-11 15:42:51', '2024-11-16 03:03:32'),
-(36, 'Zaelani Munawar', 'zaelanimunawar14@gmail.com', '$2y$12$0dcHL96IBMSC0mPLD0TbKuIxW8xNpi1yKkZyEQHQKxgu.ilh8RtP6', 'Aktif', 'Laki-laki', '2007-06-13', 'U-19', '081333818774', 'Akbar Munawar', '081266699767', 'Kp. Cijeungjing RT 03 RW 16', NULL, NULL, 'foto_siswa/6772339b5c177.jpg', 'a4d857ef-cfaa-4185-8ce2-460ede1b65dc', '2024-12-30 05:46:07', '2024-12-30 05:46:07');
+(30, 'Rafli Mahendra', 'raflimahendra20@gmail.com', '$2y$12$qUr4xaCg9YySYHhd9RrSE.erLdLYu1mH9SdAikYd.IWMdRlx5uOVK', 'Aktif', 'Laki-laki', '2006-07-30', 'U-19', '085614746826', 'Mulyadi Sulaimansyah', '081233677967', 'Kp. Ciburial Mekar RT 02 RW 07 Desa Margajaya Kec.Ngamprah', NULL, NULL, 'foto_siswa/673225fa9bba0.jpg', '4aed6ff5-3fb2-4ba7-9394-13dfb20bbeab', '2024-11-11 15:42:51', '2024-11-16 03:03:32');
 
 --
 -- Indexes for dumped tables
@@ -442,7 +450,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendances`
 --
 ALTER TABLE `attendances`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -454,7 +462,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pengajuanizins`
 --
 ALTER TABLE `pengajuanizins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -478,7 +486,7 @@ ALTER TABLE `role_has_permissions`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `settingsprofiles`
